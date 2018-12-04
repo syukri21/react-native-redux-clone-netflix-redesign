@@ -55,8 +55,6 @@ class WatchList extends React.Component {
 					<CardItem
 						style={{
 							flex: 3,
-							borderBottomColor: 'black',
-							borderBottomWidth: 2,
 							backgroundColor: '#222',
 							borderRadius: 0
 						}}
