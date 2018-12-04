@@ -4,7 +4,7 @@ import { Container, Content, Form, Label, Input, Icon, Item, CheckBox, Text, But
 import HeaderMod from '../components/HeaderMod';
 import Logo from '../components/Logo';
 
-import { styles } from 'react-native';
+import { styles } from './signup-style';
 
 class SignUp extends React.Component {
 	state = {

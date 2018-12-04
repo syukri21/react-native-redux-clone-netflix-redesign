@@ -30,7 +30,6 @@ class Home extends React.Component {
 				style={styles.item}
 				key={i}
 				onPress={() => this.navigation.navigate('Detail', { itemId: data.id })}
-				on
 			>
 				<CardItem cardBody>
 					<Image style={styles.itemImage} source={data.gambar} resizeMode="cover" />
@@ -59,8 +58,8 @@ class Home extends React.Component {
 					<Content>
 						<View>
 							<Grid
-								{...this.props}
 								style={styles.list}
+								{...this.props}
 								renderItem={this.renderItem}
 								data={film}
 								itemsPerRow={2}

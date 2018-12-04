@@ -8,8 +8,9 @@ const deleteWatchListReducer = (state, action) => {
 
 const addWatchListReducer = (state, action) => {
 	let cekId = state.watchListFilm.find((film) => action.id == film.id);
-	if (cekId === undefined) {
-		let newFilms = state.film.find((film) => action.id == film.id);
+	let newFilms = state.film.find((film) => action.id == film.id);
+
+	if (cekId === undefined)
 		return {
 			...state,
 			watchListFilm: [
@@ -17,9 +18,8 @@ const addWatchListReducer = (state, action) => {
 				newFilms
 			]
 		};
-	} else {
-		return state;
-	}
+
+	return state;
 };
 
 export { deleteWatchListReducer, addWatchListReducer };

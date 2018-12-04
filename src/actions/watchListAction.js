@@ -8,13 +8,4 @@ const addWatchList = (id) => ({
 	id
 });
 
-const getWatchList = () => ({
-	type: 'GET_WATCHLIST'
-});
-
-const getOneWatchListById = (id) => ({
-	type: 'GET_ONE_WATCHLIST_BY_ID',
-	id
-});
-
-export { deleteWatchList, addWatchList, getWatchList, getOneWatchListById };
+export { deleteWatchList, addWatchList };

@@ -22,8 +22,14 @@ class HeaderMod extends React.Component {
 
 	buttonAdd() {
 		return (
-			<Button transparent light iconRight style={styles.buttonAdd}>
-				<Icon active name="md-add-circle" style={{ color: '#2A90ED' }} />
+			<Button
+				transparent
+				light
+				iconRight
+				style={styles.buttonAdd}
+				onPress={() => this.props.navigation.navigate('Search')}
+			>
+				<Icon active name="md-add-circle" style={{ color: '#2A90ED', fontSize: 40 }} />
 			</Button>
 		);
 	}
@@ -45,7 +51,8 @@ const styles = StyleSheet.create({
 	header: {
 		backgroundColor: '#000000',
 		borderBottomWidth: 2,
-		borderBottomColor: '#410D0C'
+		borderBottomColor: '#410D0C',
+		height: 80
 	},
 	buttonBack: {
 		transform: [
