@@ -43,7 +43,7 @@ class Search extends React.Component {
 			>
 				<View style={{ flex: 1, margin: 0, padding: 0, flexDirection: 'row' }}>
 					<CardItem style={{ flex: 2, padding: 0, backgroundColor: 'green' }} cardBody>
-						<Image source={item.gambar} style={{ width: '100%', height: 70, flex: 1 }} />
+						<Image source={item.gambar} style={{ width: '100%', height: 100, flex: 1 }} />
 					</CardItem>
 					<CardItem
 						style={{
@@ -104,9 +104,6 @@ class Search extends React.Component {
 						</Body>
 					)}
 				</Content>
-				<Footer>
-					<FooterTab />
-				</Footer>
 			</Container>
 		);
 	}
