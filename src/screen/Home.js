@@ -2,7 +2,6 @@ import React from 'react';
 import { Image, View, TouchableOpacity } from 'react-native';
 import Grid from 'react-native-grid-component';
 import { Container, Content, CardItem, Text, Button, Drawer } from 'native-base';
-import { _ } from 'lodash';
 import { connect } from 'react-redux';
 
 import HeaderMod from '../components/HeaderMod';

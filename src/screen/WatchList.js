@@ -91,7 +91,7 @@ class WatchList extends React.Component {
 					<Content style={{ backgroundColor: 'black' }}>
 						<List
 							renderRow={(data) => this.renderItem(data)}
-							rightOpenValue={-85}
+							rightOpenValue={-100}
 							dataSource={this.state.ds.cloneWithRows(this.props.watchListFilm)}
 							renderRightHiddenRow={(data, secId, rowId, rowMap) => (
 								<Button full danger onPress={() => this.handleDelete(secId, rowId, rowMap, data.id)}>
