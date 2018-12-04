@@ -4,7 +4,8 @@ import { searchFilmsReducer } from './searchListReducer';
 let initState = {
 	film: film,
 	watchListFilm: film,
-	searchListFilm: []
+	searchListFilm: [],
+	searchData: null
 };
 
 const rootReducer = (state = initState, action) => {

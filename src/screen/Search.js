@@ -28,7 +28,8 @@ class Search extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			ds: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
+			ds: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }),
+			placeholder: props.searchData
 		};
 		this.navigation = props.navigation;
 	}
@@ -73,9 +74,10 @@ class Search extends React.Component {
 				<Header style={styles.header} searchBar rounded>
 					<Item style={styles.itemLeft}>
 						<Input
+							value={this.props.searchData}
 							style={styles.inputSearch}
-							placeholder="Search"
 							onChangeText={(e) => this.props.onSearch(e)}
+							placeholder="Search"
 						/>
 						<Icon
 							style={[
@@ -110,7 +112,8 @@ class Search extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-	searchListFilm: state.searchListFilm
+	searchListFilm: state.searchListFilm,
+	searchData: state.searchData
 });
 
 const mapDispatchToProps = (dispatch) => ({
