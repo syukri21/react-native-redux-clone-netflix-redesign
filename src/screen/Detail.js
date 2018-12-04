@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Content, Text, Button, Icon, Card, CardItem, Body, View } from 'native-base';
+import { Container, Content, Text, Button, Icon, Card, CardItem, Body, View, Left } from 'native-base';
 import { Rating } from 'react-native-ratings';
 import { Image } from 'react-native';
 
@@ -9,6 +9,7 @@ import { addWatchList } from '../actions/watchListAction';
 
 // components
 import ButtonIconGroup from '../components/ButtonIconGroup';
+import Video from 'react-native-video';
 
 // styles
 import { styles, styleButtonGroup1, styleButtonGroup2 } from './detail-style';
@@ -74,10 +75,36 @@ class Detail extends React.Component {
 						<CardItem>
 							<Text style={styles.textDescription}>{data.description}</Text>
 						</CardItem>
+						<CardItem
+							style={{
+								padding: 20,
+								overflow: 'hidden'
+							}}
+						>
+							<Image
+								source={data.gambar}
+								style={{
+									width: '100%',
+									height: 300,
+									borderRadius: 10
+								}}
+							/>
+						</CardItem>
 						<CardItem style={styles.cardItem}>
-							<View>
-								<Text style={styles.textTanggalRilisLabel}>Tanggal Rilis</Text>
+							<View
+								style={{
+									flexDirection: 'column',
+									position: 'absolute',
+									left: 0,
+									paddingLeft: 10
+								}}
+							>
+								<Text style={styles.textTanggalRilisLabelLeft}>Tanggal RIlis</Text>
 								<Text style={styles.textTanggalRilis}>{data.tanggalRilis}</Text>
+							</View>
+							<View>
+								<Text style={styles.textTanggalRilisLabelRight}>Sutradara</Text>
+								<Text style={styles.textTanggalRilis}>{data.sutradara}</Text>
 							</View>
 						</CardItem>
 					</Card>

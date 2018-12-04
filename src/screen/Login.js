@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Container, Content, Form, Input, Item, Label, Icon, Button, Text, Footer, View } from 'native-base';
-import Video from 'react-native-video';
 
 import { styles } from './login-style';
 
@@ -21,13 +20,6 @@ class Login extends Component {
 					<Text style={styles.title}>VIDEOS</Text>
 				</View>
 				<Content style={styles.contentDown}>
-					<Video
-						source={{ uri: 'https://www.youtube.com/embed/S30VkLn5a2o' }}
-						ref={(ref) => {
-							this.player = ref;
-						}}
-						style={styles.backgroundVideo}
-					/>
 					<Form style={styles.form}>
 						<Item floatingLabel last>
 							<Icon style={styles.icon} active name="mail" />
@@ -65,5 +57,3 @@ class Login extends Component {
 }
 
 export default Login;
-
-// https://www.youtube.com/embed/S30VkLn5a2o

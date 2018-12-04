@@ -71,10 +71,15 @@ const styles = StyleSheet.create({
 		color: '#343434',
 		textAlign: 'center'
 	},
-	textTanggalRilisLabel: {
+	textTanggalRilisLabelRight: {
 		fontSize: 12,
 		opacity: 0.6,
 		textAlign: 'right'
+	},
+	textTanggalRilisLabelLeft: {
+		fontSize: 12,
+		opacity: 0.6,
+		textAlign: 'left'
 	},
 	textTanggalRilis: {
 		fontSize: 12,
