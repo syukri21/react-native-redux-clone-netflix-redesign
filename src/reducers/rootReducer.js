@@ -7,6 +7,15 @@ let initState = {
 };
 
 const rootReducer = (state = initState, action) => {
+	switch (action.type) {
+		case 'DELETE_WATCHLIST':
+			break;
+		case 'ADD_WATCHLIST':
+			break;
+		default:
+			break;
+	}
+
 	if (action.type === 'DELETE_WATCHLIST') {
 		return deleteWatchListReducer(state, action);
 	} else if (action.type === 'ADD_WATCHLIST') {

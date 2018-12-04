@@ -103,7 +103,7 @@ const styleButtonGroup2 = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-between'
 	},
-	iconButton: { fontSize: 30 }
+	iconButton: { fontSize: 40 }
 });
 
 export { styles, styleButtonGroup1, styleButtonGroup2 };

@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Content, Text, Button, Icon, Card, CardItem, Body, View } from 'native-base';
 import { Rating } from 'react-native-ratings';
 import { Image } from 'react-native';
+
 // redux
 import { connect } from 'react-redux';
 import { addWatchList } from '../actions/watchListAction';
@@ -13,6 +14,9 @@ import ButtonIconGroup from '../components/ButtonIconGroup';
 import { styles, styleButtonGroup1, styleButtonGroup2 } from './detail-style';
 
 class Detail extends React.Component {
+	state = {
+		check: false
+	};
 	handleAdd(id) {
 		this.props.addWatchList(id);
 		alert('Selamat film di Bookmark :)');
@@ -56,6 +60,7 @@ class Detail extends React.Component {
 								</View>
 							</Body>
 						</CardItem>
+
 						<CardItem style={styles.warpRating}>
 							<Rating
 								type="heart"
