@@ -19,7 +19,7 @@ const App = createStackNavigator(
 		Search
 	},
 	{
-		initialRouteName: 'Search',
+		initialRouteName: 'Home',
 		headerMode: 'none'
 	}
 );
