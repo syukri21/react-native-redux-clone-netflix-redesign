@@ -1,14 +1,45 @@
 import React from 'react';
-import { Container, Content, Card, CardItem, Button, Text } from 'native-base';
-import { StyleSheet } from 'react-native';
-
+import { Container, Content, CardItem, Button, Text } from 'native-base';
+import { StyleSheet, findNodeHandle } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import Logo from './Logo';
-
+import BackgroundImage from './BackgroundImage';
 class Sidebar extends React.Component {
+	state = {
+		viewRef: null
+	};
+
+	imageLoaded() {
+		this.setState({
+			viewRef: findNodeHandle(this.background)
+		});
+	}
+
+	blurViewLoad = () => (
+		<BlurView style={styles.absolute} blurType="dark" blurAmount={1} viewRef={this.state.viewRef} />
+	);
 	render() {
 		let opt1 = this.props.watchList ? 'Home' : 'WatchList';
 		return (
 			<Container style={styles.container}>
+				<BackgroundImage image={require('../assets/sidebar.jpg')}>
+					<LinearGradient
+						colors={[
+							'#000000',
+							'#00000066',
+							'#000000'
+						]}
+						style={styles.absolute}
+						start={{
+							x: 0,
+							y: 0
+						}}
+						end={{
+							x: 0,
+							y: 1
+						}}
+					/>
+				</BackgroundImage>
 				<Content>
 					<CardItem style={{ backgroundColor: 'black', justifyContent: 'center' }}>
 						<Logo />
@@ -28,15 +59,22 @@ class Sidebar extends React.Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: 'rgba(0,0,0,0.8)'
+		backgroundColor: 'transparent'
 	},
 	cardItem: {
 		flex: 1,
-		backgroundColor: 'rgba(0,0,0,0.8)'
+		backgroundColor: 'transparent'
 	},
 	button: {
 		flex: 1,
 		backgroundColor: '#B7135C'
+	},
+	absolute: {
+		position: 'absolute',
+		top: 0,
+		left: 0,
+		bottom: 0,
+		right: 0
 	}
 });
 

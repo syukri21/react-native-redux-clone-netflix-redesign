@@ -1,64 +1,43 @@
 import React from 'react';
 import { Container, Content, Form, Label, Input, Icon, Item, CheckBox, Text, Button, View } from 'native-base';
 import LinearGradient from 'react-native-linear-gradient';
-import { BlurView } from 'react-native-blur';
-import { Image, findNodeHandle } from 'react-native';
 import HeaderMod from '../components/HeaderMod';
 import Logo from '../components/Logo';
 import { BoxShadow } from 'react-native-shadow';
 import { styles } from './signup-style';
-
+import BackgroundImage from '../components/BackgroundImage';
 class SignUp extends React.Component {
 	state = {
-		check: false,
-		viewRef: null
+		check: false
 	};
 
-	imageLoaded() {
-		this.setState({
-			viewRef: findNodeHandle(this.background)
-		});
-	}
-
-	blurViewLoad = () => (
-		<BlurView style={styles.absolute} blurType="dark" blurAmount={1} viewRef={this.state.viewRef} />
-	);
 	render() {
 		return (
 			<Container>
 				<HeaderMod register {...this.props}>
 					Register
 				</HeaderMod>
-				<Image
-					source={require('../assets/register.jpg')}
-					style={{
-						position: 'absolute',
-						width: '100%',
-						height: '100%',
-						zIndex: -100
-					}}
-					ref={(ref) => (this.background = ref)}
-					onLoadEnd={this.imageLoaded.bind(this)}
-				/>
-				{/* {this.state.viewRef && this.blurViewLoad()} */}
-				<LinearGradient
-					colors={[
-						'#000000',
-						'#00000077',
-						'#ffffff11',
-						'#00000077',
-						'#000000'
-					]}
-					style={styles.absolute}
-					start={{
-						x: 0,
-						y: 1
-					}}
-					end={{
-						x: 0,
-						y: 0
-					}}
-				/>
+				<BackgroundImage image={require('../assets/register.jpg')}>
+					<LinearGradient
+						colors={[
+							'#000000',
+							'#00000077',
+							'#ffffff11',
+							'#00000077',
+							'#000000'
+						]}
+						style={styles.absolute}
+						start={{
+							x: 0,
+							y: 1
+						}}
+						end={{
+							x: 0,
+							y: 0
+						}}
+					/>
+				</BackgroundImage>
+
 				<Content style={styles.content}>
 					<Logo />
 					<View>

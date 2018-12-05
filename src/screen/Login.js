@@ -1,58 +1,36 @@
 import React, { Component } from 'react';
 import { Container, Content, Form, Input, Item, Label, Icon, Button, Text, Footer, View } from 'native-base';
 import LinearGradient from 'react-native-linear-gradient';
-import { Image, TouchableOpacity, findNodeHandle } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { styles } from './login-style';
-import { BlurView } from 'react-native-blur';
 import { BoxShadow } from 'react-native-shadow';
+
+import BackgroundImage from '../components/BackgroundImage';
 class Login extends Component {
-	state = {
-		viewRef: null
-	};
-
-	imageLoaded() {
-		this.setState({
-			viewRef: findNodeHandle(this.background)
-		});
-	}
-
-	blurViewLoad = () => (
-		<BlurView style={styles.absolute} blurType="dark" blurAmount={1} viewRef={this.state.viewRef} />
-	);
-
 	render() {
 		return (
 			<Container style={styles.container}>
-				<Image
-					source={require('../assets/full.jpg')}
-					style={{
-						position: 'absolute',
-						width: '100%',
-						height: '100%'
-					}}
-					ref={(ref) => (this.background = ref)}
-					onLoadEnd={this.imageLoaded.bind(this)}
-				/>
-				{/* {this.state.viewRef && this.blurViewLoad()} */}
+				<BackgroundImage image={require('../assets/full.jpg')}>
+					<LinearGradient
+						colors={[
+							'#000000',
+							'#00000077',
+							'#ffffff11',
+							'#00000077',
+							'#000000'
+						]}
+						style={styles.absolute}
+						start={{
+							x: 0,
+							y: 1
+						}}
+						end={{
+							x: 0,
+							y: 0
+						}}
+					/>
+				</BackgroundImage>
 
-				<LinearGradient
-					colors={[
-						'#000000',
-						'#00000077',
-						'#ffffff11',
-						'#00000077',
-						'#000000'
-					]}
-					style={styles.absolute}
-					start={{
-						x: 0,
-						y: 1
-					}}
-					end={{
-						x: 0,
-						y: 0
-					}}
-				/>
 				<View style={styles.contentUp}>
 					<Icon
 						style={[
@@ -112,11 +90,12 @@ class Login extends Component {
 						</BoxShadow>
 					</View>
 				</Content>
+
 				<Footer style={styles.footer}>
 					<LinearGradient
 						colors={[
-							'#B7135C55',
-							'#3F51B555'
+							'#B4155E',
+							'#4050B4'
 						]}
 						style={styles.absolute}
 						start={{

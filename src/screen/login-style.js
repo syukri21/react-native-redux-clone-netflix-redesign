@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
 		flex: 4
 	},
 	footer: {
-		backgroundColor: 'black'
+		backgroundColor: 'transparent'
 	},
 	backgroundVideo: {
 		position: 'absolute',
@@ -60,14 +60,15 @@ const styles = StyleSheet.create({
 	buttonSignIn: {
 		borderRadius: 10,
 		overflow: 'hidden',
-		height: 60
+		height: 55
 	},
 	textSignIn: {
-		fontSize: 22
+		fontSize: 16
 	},
 	buttonSignUp: {
 		color: 'white',
-		fontSize: 15
+		fontSize: 15,
+		marginTop: 10
 	},
 	input: {
 		color: 'white',
