@@ -16,6 +16,8 @@
     "react-native-grid-component": "^1.1.0",
     "react-native-linear-gradient": "^2.5.3",
     "react-native-ratings": "^6.0.0",
+    "react-native-shadow": "^1.2.2",
+    "react-native-svg": "^8.0.8",
     "react-native-vector-icons": "^6.1.0",
     "react-navigation": "^3.0.4",
     "react-redux": "^5.1.1",
