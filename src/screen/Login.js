@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
 import { Container, Content, Form, Input, Item, Label, Icon, Button, Text, Footer, View } from 'native-base';
 import LinearGradient from 'react-native-linear-gradient';
-import { Image, TouchableOpacity } from 'react-native';
+import { Image, TouchableOpacity, findNodeHandle } from 'react-native';
 import { styles } from './login-style';
+import { BlurView, VibrancyView } from 'react-native-blur';
 
 class Login extends Component {
+	state = {
+		viewRef: null
+	};
+
+	imageLoaded() {
+		this.setState({
+			viewRef: findNodeHandle(this.background)
+		});
+	}
+
 	render() {
 		return (
 			<Container style={styles.container}>
@@ -14,7 +25,13 @@ class Login extends Component {
 						position: 'absolute',
 						height: '100%'
 					}}
+					ref={(ref) => (this.background = ref)}
+					onLoadEnd={this.imageLoaded.bind(this)}
 				/>
+				{this.state.viewRef && (
+					<BlurView style={styles.absolute} blurType="light" blurAmount={1.5} viewRef={this.state.viewRef} />
+				)}
+
 				<LinearGradient
 					colors={[
 						'#000000',
@@ -23,13 +40,7 @@ class Login extends Component {
 						'#000000aa',
 						'#000000'
 					]}
-					style={{
-						position: 'absolute',
-						top: 0,
-						left: 0,
-						bottom: 0,
-						right: 0
-					}}
+					style={styles.absolute}
 					start={{
 						x: 0,
 						y: 1

@@ -50,7 +50,12 @@ const styles = StyleSheet.create({
 	},
 	buttonForgotPass: {
 		color: '#B7135C',
-		fontSize: 16
+		fontSize: 20,
+		fontWeight: '200',
+		textShadowColor: 'black',
+		textShadowOffset: { width: 1, height: 1 },
+		textShadowRadius: 10,
+		width: 200
 	},
 	buttonSignIn: {
 		borderRadius: 4
@@ -70,6 +75,13 @@ const styles = StyleSheet.create({
 	// Color
 	red: {
 		color: '#B7135C'
+	},
+	absolute: {
+		position: 'absolute',
+		top: 0,
+		left: 0,
+		bottom: 0,
+		right: 0
 	}
 });
 
