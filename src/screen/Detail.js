@@ -9,7 +9,6 @@ import { addWatchList } from '../actions/watchListAction';
 
 // components
 import ButtonIconGroup from '../components/ButtonIconGroup';
-import Video from 'react-native-video';
 
 // styles
 import { styles, styleButtonGroup1, styleButtonGroup2 } from './detail-style';
@@ -41,7 +40,6 @@ class Detail extends React.Component {
 							</Button>
 						</View>
 					</View>
-
 					<View style={styleButtonGroup2.viewButton}>
 						<Button transparent light onPress={() => navigation.goBack()}>
 							<Icon active name="md-add-circle" style={styleButtonGroup2.iconButton} />
@@ -61,7 +59,6 @@ class Detail extends React.Component {
 								</View>
 							</Body>
 						</CardItem>
-
 						<CardItem style={styles.warpRating}>
 							<Rating
 								type="heart"
