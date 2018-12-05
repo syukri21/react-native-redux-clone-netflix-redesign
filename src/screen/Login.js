@@ -29,15 +29,15 @@ class Login extends Component {
 					onLoadEnd={this.imageLoaded.bind(this)}
 				/>
 				{this.state.viewRef && (
-					<BlurView style={styles.absolute} blurType="light" blurAmount={1.5} viewRef={this.state.viewRef} />
+					<BlurView style={styles.absolute} blurType="dark" blurAmount={1} viewRef={this.state.viewRef} />
 				)}
 
 				<LinearGradient
 					colors={[
 						'#000000',
-						'#000000aa',
+						'#00000077',
 						'#ffffff11',
-						'#000000aa',
+						'#00000077',
 						'#000000'
 					]}
 					style={styles.absolute}

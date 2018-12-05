@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
 		padding: 10
 	},
 	buttonForgotPass: {
-		color: '#B7135C',
+		color: '#3F51B5',
 		fontSize: 20,
 		fontWeight: '200',
 		textShadowColor: 'black',
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
 	},
 	item: {
 		borderBottomColor: 'white',
-		borderBottomWidth: 3
+		borderBottomWidth: 5
 	},
 
 	// Color
