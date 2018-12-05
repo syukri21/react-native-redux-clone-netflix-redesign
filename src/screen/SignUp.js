@@ -5,7 +5,7 @@ import { BlurView } from 'react-native-blur';
 import { Image, findNodeHandle } from 'react-native';
 import HeaderMod from '../components/HeaderMod';
 import Logo from '../components/Logo';
-
+import { BoxShadow } from 'react-native-shadow';
 import { styles } from './signup-style';
 
 class SignUp extends React.Component {
@@ -92,34 +92,31 @@ class SignUp extends React.Component {
 								/>
 								<Text style={styles.text}>I accept the Terms and Conditions</Text>
 							</View>
-							<Button
-								full
-								iconLeft
-								style={[
-									styles.buttonSignUp
-								]}
-							>
-								<LinearGradient
-									colors={[
-										'#B7135C',
-										'#3F51B5'
-									]}
-									style={{
-										width: '100%',
-										height: 70,
-										position: 'absolute'
-									}}
-									start={{
-										x: 0,
-										y: 1
-									}}
-									end={{
-										x: 1,
-										y: 0
-									}}
-								/>
-								<Text style={styles.text}>SignUp</Text>
-							</Button>
+
+							<BoxShadow setting={shadowOpt}>
+								<Button full iconLeft style={styles.buttonSignUp}>
+									<LinearGradient
+										colors={[
+											'#B7135C',
+											'#3F51B5'
+										]}
+										style={{
+											width: '100%',
+											height: 70,
+											position: 'absolute'
+										}}
+										start={{
+											x: 0,
+											y: 1
+										}}
+										end={{
+											x: 1,
+											y: 0
+										}}
+									/>
+									<Text style={styles.text}>SignUp</Text>
+								</Button>
+							</BoxShadow>
 						</View>
 					</View>
 				</Content>
@@ -127,5 +124,23 @@ class SignUp extends React.Component {
 		);
 	}
 }
+
+const shadowOpt = {
+	width: 340,
+	height: 70,
+	color: '#000',
+	border: 10,
+	radius: 15,
+	opacity: 0.4,
+	x: 0,
+	y: -4,
+	style: {
+		flex: 1,
+		width: 340,
+		alignSelf: 'center',
+		borderRadius: 10,
+		marginBottom: 100
+	}
+};
 
 export default SignUp;
