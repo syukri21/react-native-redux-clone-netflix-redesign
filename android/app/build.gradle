@@ -98,6 +98,8 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
+        renderscriptTargetApi 23
+        renderscriptSupportModeEnabled true
         applicationId "com.setupawal"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
@@ -137,6 +139,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-blur')
     compile project(':react-native-linear-gradient')
     compile project(':react-native-gesture-handler')
     compile project(':react-native-vector-icons')
