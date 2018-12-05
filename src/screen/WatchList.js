@@ -21,6 +21,8 @@ import { connect } from 'react-redux';
 import { deleteWatchList } from '../actions/watchListAction';
 import HeaderMod from '../components/HeaderMod';
 import DrawerMod from '../components/DrawerMod';
+import BackgroundImage from '../components/BackgroundImage';
+import LinearGradient from 'react-native-linear-gradient';
 
 class WatchList extends React.Component {
 	constructor(props) {
@@ -82,7 +84,7 @@ class WatchList extends React.Component {
 		const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 		return (
 			<DrawerMod isOpen={this.state.isOpen} watchList {...this.props}>
-				<Container>
+				<Container style={{ backgroundColor: 'transparent' }}>
 					<HeaderMod {...this.props} menu={true} toggleDrawer={this.toggleDrawer.bind(this)} add>
 						My Watchlist
 					</HeaderMod>

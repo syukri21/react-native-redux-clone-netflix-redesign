@@ -20,6 +20,7 @@
     "react-native-svg": "^8.0.8",
     "react-native-vector-icons": "^6.1.0",
     "react-navigation": "^3.0.4",
+    "react-navigation-transitions": "^1.0.6",
     "react-redux": "^5.1.1",
     "redux": "^4.0.1",
     "redux-persist": "^5.10.0"

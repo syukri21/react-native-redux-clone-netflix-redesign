@@ -1,4 +1,5 @@
 import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { fromLeft, fromTop, fadeIn, zoomIn } from 'react-navigation-transitions';
 
 import Login from './src/screen/Login';
 import ForgotPassword from './src/screen/ForgotPassword';
@@ -20,7 +21,8 @@ const App = createStackNavigator(
 	},
 	{
 		initialRouteName: 'Login',
-		headerMode: 'none'
+		headerMode: 'none',
+		transitionConfig: () => fromLeft(800)
 	}
 );
 
