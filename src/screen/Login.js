@@ -88,11 +88,41 @@ class Login extends Component {
 							style={styles.buttonSignIn}
 							onPress={() => this.props.navigation.navigate('Home')}
 						>
-							<Text>Sign In</Text>
+							<LinearGradient
+								colors={[
+									'#B7135C',
+									'#3F51B5'
+								]}
+								style={styles.absolute}
+								start={{
+									x: 0,
+									y: 1
+								}}
+								end={{
+									x: 1,
+									y: 0
+								}}
+							/>
+							<Text style={styles.textSignIn}>Log In</Text>
 						</Button>
 					</View>
 				</Content>
 				<Footer style={styles.footer}>
+					<LinearGradient
+						colors={[
+							'#B7135C55',
+							'#3F51B555'
+						]}
+						style={styles.absolute}
+						start={{
+							x: 0,
+							y: 1
+						}}
+						end={{
+							x: 1,
+							y: 0
+						}}
+					/>
 					<Button transparent onPress={() => this.props.navigation.navigate('SignUp')}>
 						<Text style={styles.buttonSignUp}>Sign up for free</Text>
 					</Button>

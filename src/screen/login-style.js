@@ -58,14 +58,20 @@ const styles = StyleSheet.create({
 		width: 200
 	},
 	buttonSignIn: {
-		borderRadius: 4
+		borderRadius: 10,
+		overflow: 'hidden',
+		height: 60
+	},
+	textSignIn: {
+		fontSize: 22
 	},
 	buttonSignUp: {
 		color: 'white',
 		fontSize: 15
 	},
 	input: {
-		color: 'white'
+		color: 'white',
+		fontSize: 20
 	},
 	item: {
 		borderBottomColor: 'white',
