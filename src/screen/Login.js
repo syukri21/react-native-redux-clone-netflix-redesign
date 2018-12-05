@@ -3,8 +3,8 @@ import { Container, Content, Form, Input, Item, Label, Icon, Button, Text, Foote
 import LinearGradient from 'react-native-linear-gradient';
 import { Image, TouchableOpacity, findNodeHandle } from 'react-native';
 import { styles } from './login-style';
-import { BlurView, VibrancyView } from 'react-native-blur';
-
+import { BlurView } from 'react-native-blur';
+import { BoxShadow } from 'react-native-shadow';
 class Login extends Component {
 	state = {
 		viewRef: null
@@ -27,12 +27,13 @@ class Login extends Component {
 					source={require('../assets/full.jpg')}
 					style={{
 						position: 'absolute',
+						width: '100%',
 						height: '100%'
 					}}
 					ref={(ref) => (this.background = ref)}
 					onLoadEnd={this.imageLoaded.bind(this)}
 				/>
-				{this.state.viewRef && this.blurViewLoad()}
+				{/* {this.state.viewRef && this.blurViewLoad()} */}
 
 				<LinearGradient
 					colors={[
@@ -84,29 +85,31 @@ class Login extends Component {
 						>
 							<Text style={styles.buttonForgotPass}>Forgot My Password ?</Text>
 						</TouchableOpacity>
-						<Button
-							primary
-							full
-							style={styles.buttonSignIn}
-							onPress={() => this.props.navigation.navigate('Home')}
-						>
-							<LinearGradient
-								colors={[
-									'#B7135C',
-									'#3F51B5'
-								]}
-								style={styles.absolute}
-								start={{
-									x: 0,
-									y: 1
-								}}
-								end={{
-									x: 1,
-									y: 0
-								}}
-							/>
-							<Text style={styles.textSignIn}>Log In</Text>
-						</Button>
+						<BoxShadow setting={shadowOpt}>
+							<Button
+								primary
+								full
+								style={styles.buttonSignIn}
+								onPress={() => this.props.navigation.navigate('Home')}
+							>
+								<LinearGradient
+									colors={[
+										'#B7135C',
+										'#3F51B5'
+									]}
+									style={styles.absolute}
+									start={{
+										x: 0,
+										y: 1
+									}}
+									end={{
+										x: 1,
+										y: 0
+									}}
+								/>
+								<Text style={styles.textSignIn}>Log In</Text>
+							</Button>
+						</BoxShadow>
 					</View>
 				</Content>
 				<Footer style={styles.footer}>
@@ -133,5 +136,23 @@ class Login extends Component {
 		);
 	}
 }
+
+const shadowOpt = {
+	width: 350,
+	height: 70,
+	color: '#000',
+	border: 10,
+	radius: 15,
+	opacity: 0.3,
+	x: -5,
+	y: -4,
+	style: {
+		flex: 1,
+		width: 340,
+		alignSelf: 'center',
+		borderRadius: 10,
+		marginBottom: 100
+	}
+};
 
 export default Login;

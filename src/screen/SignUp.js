@@ -126,13 +126,13 @@ class SignUp extends React.Component {
 }
 
 const shadowOpt = {
-	width: 340,
+	width: 350,
 	height: 70,
 	color: '#000',
 	border: 10,
 	radius: 15,
-	opacity: 0.4,
-	x: 0,
+	opacity: 0.3,
+	x: -5,
 	y: -4,
 	style: {
 		flex: 1,
