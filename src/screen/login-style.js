@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
 	// Structure
 	container: {
 		flex: 1,
-		backgroundColor: '#000'
+		backgroundColor: 'black'
 	},
 	contentUp: {
 		flex: 0.8,
@@ -28,7 +28,8 @@ const styles = StyleSheet.create({
 	// Components
 	title: {
 		fontSize: 30,
-		color: '#2A90ED'
+		color: '#3F51B5',
+		fontWeight: 'bold'
 	},
 	form: {
 		padding: 10
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
 	label: {
 		fontSize: 20,
 		lineHeight: 16,
-		color: '#686566'
+		color: 'white'
 	},
 	icon: {
 		transform: [
@@ -48,8 +49,8 @@ const styles = StyleSheet.create({
 		padding: 10
 	},
 	buttonForgotPass: {
-		fontSize: 12,
-		color: '#dfdfdf'
+		color: '#B7135C',
+		fontSize: 16
 	},
 	buttonSignIn: {
 		borderRadius: 4
@@ -61,6 +62,11 @@ const styles = StyleSheet.create({
 	input: {
 		color: 'white'
 	},
+	item: {
+		borderBottomColor: 'white',
+		borderBottomWidth: 3
+	},
+
 	// Color
 	red: {
 		color: '#B7135C'
