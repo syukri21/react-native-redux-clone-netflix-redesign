@@ -1,5 +1,6 @@
 import React from 'react';
 import { Header, Button, Icon, Text } from 'native-base';
+import LinearGradient from 'react-native-linear-gradient';
 
 import { StyleSheet, View } from 'react-native';
 
@@ -36,7 +37,28 @@ class HeaderMod extends React.Component {
 
 	render() {
 		return (
-			<View>
+			<View style={{ position: 'relative', top: 0, left: 0, zIndex: 1000 }}>
+				<LinearGradient
+					colors={[
+						'#020203',
+						'#020203'
+					]}
+					style={{
+						height: 80,
+						position: 'absolute',
+						top: 0,
+						left: 0,
+						width: '100%'
+					}}
+					start={{
+						x: 0,
+						y: 0
+					}}
+					end={{
+						x: 1,
+						y: 0
+					}}
+				/>
 				<Header style={styles.header}>
 					{this.props.menu ? this.buttonMenu() : this.buttonBack()}
 					<Text style={styles.headerText}>{this.props.children}</Text>
@@ -49,10 +71,8 @@ class HeaderMod extends React.Component {
 
 const styles = StyleSheet.create({
 	header: {
-		backgroundColor: '#000000',
-		borderBottomWidth: 2,
-		borderBottomColor: '#410D0C',
-		height: 80
+		height: 80,
+		backgroundColor: 'transparent'
 	},
 	buttonBack: {
 		transform: [
@@ -69,6 +89,14 @@ const styles = StyleSheet.create({
 		transform: [
 			{ translateX: 15 }
 		]
+	},
+	absolute: {
+		position: 'absolute',
+		top: 80,
+		left: 0,
+		right: 0,
+		bottom: 0,
+		flex: 1
 	}
 });
 export default HeaderMod;

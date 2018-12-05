@@ -16,6 +16,10 @@ class Login extends Component {
 		});
 	}
 
+	blurViewLoad = () => (
+		<BlurView style={styles.absolute} blurType="dark" blurAmount={1} viewRef={this.state.viewRef} />
+	);
+
 	render() {
 		return (
 			<Container style={styles.container}>
@@ -28,9 +32,7 @@ class Login extends Component {
 					ref={(ref) => (this.background = ref)}
 					onLoadEnd={this.imageLoaded.bind(this)}
 				/>
-				{this.state.viewRef && (
-					<BlurView style={styles.absolute} blurType="dark" blurAmount={1} viewRef={this.state.viewRef} />
-				)}
+				{this.state.viewRef && this.blurViewLoad()}
 
 				<LinearGradient
 					colors={[

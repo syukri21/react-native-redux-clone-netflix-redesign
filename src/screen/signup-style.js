@@ -1,7 +1,6 @@
 import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
 	content: {
-		backgroundColor: 'black',
 		padding: 20
 	},
 	form: {
@@ -19,20 +18,26 @@ const styles = StyleSheet.create({
 	},
 	float: {
 		transform: [
-			{ translateY: -5 }
-		]
+			{ translateY: -10 }
+		],
+		color: 'white',
+		fontSize: 20
 	},
 	text: {
 		color: '#fff'
 	},
 	itemInput: {
 		height: 50,
-		color: 'white'
+		color: 'white',
+		borderBottomColor: 'white',
+		borderBottomWidth: 2
 	},
 	checkBoxItem: {
 		justifyContent: 'space-around',
 		flexDirection: 'row',
-		marginTop: 30
+		marginTop: 30,
+		borderBottomWidth: 0,
+		color: 'white'
 	},
 	icon: {
 		color: '#fff',
@@ -41,11 +46,28 @@ const styles = StyleSheet.create({
 		]
 	},
 	input: {
-		color: '#fff'
+		color: 'white',
+		fontSize: 20
 	},
 	buttonSignUp: {
-		borderRadius: 4,
-		marginTop: 10
+		borderRadius: 10,
+		overflow: 'hidden',
+		height: 60
+	},
+	absolute: {
+		position: 'absolute',
+		height: '100%',
+		width: '100%',
+		top: 80,
+		left: 0,
+		right: 0,
+		bottom: 0,
+		flex: 1
+	},
+	buttonSignIn: {
+		borderRadius: 10,
+		overflow: 'hidden',
+		height: 60
 	}
 });
 
