@@ -5,6 +5,12 @@ import LinearGradient from 'react-native-linear-gradient';
 import { StyleSheet, View } from 'react-native';
 
 class HeaderMod extends React.Component {
+
+	constructor(props){
+		super(props);
+		this.username = props.title;
+	}
+
 	buttonMenu() {
 		return (
 			<Button transparent light style={styles.buttonBack} iconLeft onPress={() => this.props.toggleDrawer()}>
@@ -21,16 +27,18 @@ class HeaderMod extends React.Component {
 		);
 	}
 
-	buttonAdd() {
+	buttonProfile() {
 		return (
 			<Button
 				transparent
 				light
 				iconRight
 				style={styles.buttonAdd}
-				onPress={() => this.props.navigation.navigate('Search')}
+				
 			>
-				<Icon active name="md-add-circle" style={{ color: '#2A90ED', fontSize: 40 }} />
+				<Text>{this.username}</Text>
+				<Icon active name="person" style={{ color: 'white', fontSize: 40 }} />
+				
 			</Button>
 		);
 	}
@@ -62,7 +70,7 @@ class HeaderMod extends React.Component {
 				<Header style={styles.header}>
 					{this.props.menu ? this.buttonMenu() : this.buttonBack()}
 					<Text style={styles.headerText}>{this.props.children}</Text>
-					{this.props.add && this.buttonAdd()}
+					{this.props.add && this.buttonProfile()}
 				</Header>
 			</View>
 		);

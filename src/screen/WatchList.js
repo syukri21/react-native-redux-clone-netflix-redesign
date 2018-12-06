@@ -18,12 +18,11 @@ import {
 } from 'native-base';
 import { ListView, Image, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import { FloatingAction } from 'react-native-floating-action';
 
 import { deleteWatchList } from '../actions/watchListAction';
 import HeaderMod from '../components/HeaderMod';
 import DrawerMod from '../components/DrawerMod';
-import LinearGradient from 'react-native-linear-gradient';
+
 import * as Animatable from 'react-native-animatable';
 import FloatButton from '../components/FloatButton';
 
@@ -38,28 +37,37 @@ class WatchList extends React.Component {
 		this.navigation = props.navigation;
 	}
 
-	toggleDrawer() {
+	openDrawer() {
 		this.setState({
 			isOpen: true
 		});
 	}
 
+	closeDrawer = () => this.setState({
+		isOpen: false
+	})
+
 	renderItem(item) {
 		return (
 			<TouchableOpacity
 				last
-				style={{}}
+				style={{backgroundColor: 'black'}}
 				onPress={() => this.props.navigation.navigate('Detail', { itemId: item.id })}
 				key={item.id}
 			>
-				<View style={{ flex: 1, margin: 0, padding: 0, flexDirection: 'row' }}>
+				<Animatable.View 
+					style={{ flex: 1, margin: 0, padding: 0, flexDirection: 'row', backgroundColor:'#333333' }} 
+					animation='slideInRight' 
+					duration={500} 
+					ref={(ref) => this.view = ref} 
+				>
 					<CardItem style={{ flex: 2, padding: 0, backgroundColor: 'green' }} cardBody>
 						<Image source={item.gambar} style={{ width: '100%', height: 120, flex: 1 }} />
 					</CardItem>
 					<CardItem
 						style={{
 							flex: 3,
-							backgroundColor: '#222',
+							backgroundColor: 'transparent',
 							borderRadius: 0
 						}}
 					>
@@ -67,13 +75,14 @@ class WatchList extends React.Component {
 							<Text style={{ color: 'white' }}>{item.title}</Text>
 						</Left>
 					</CardItem>
-				</View>
+				</Animatable.View>
 			</TouchableOpacity>
 		);
 	}
 
 	handleDelete(secId, rowId, rowMap, id) {
-		this.props.deleteWatchList(id);
+		this.props.deleteWatchList(id)
+		
 		rowMap[`${secId}${rowId}`].props.closeRow();
 		const newData = [
 			...this.state.listViewData
@@ -82,12 +91,14 @@ class WatchList extends React.Component {
 		this.setState({ listViewData: newData });
 	}
 
+	
+
 	render() {
 		const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 		return (
 			<DrawerMod isOpen={this.state.isOpen} watchList {...this.props}>
 				<Container style={{ backgroundColor: 'transparent' }}>
-					<HeaderMod {...this.props} menu={true} toggleDrawer={this.toggleDrawer.bind(this)}>
+					<HeaderMod {...this.props} menu={true} toggleDrawer={this.openDrawer.bind(this)} add title={this.props.username} >
 						My Watchlist
 					</HeaderMod>
 					<Content style={{ backgroundColor: 'black' }}>
@@ -100,19 +111,28 @@ class WatchList extends React.Component {
 									<Icon active name="trash" />
 								</Button>
 							)}
+
+							style={{backgroundColor:'transparent'}}
 						/>
 					</Content>
 
-					<FloatButton {...this.props} />
+					<FloatButton {...this.props} closeDrawer = {this.closeDrawer.bind(this)} />
 				</Container>
 			</DrawerMod>
 		);
 	}
 }
 
-const mapStateToProps = (state) => ({
-	watchListFilm: state.watchListFilm
-});
+const mapStateToProps = (state) => {
+
+	let data = state.users.find(user => user.isLoged);
+
+
+	return({
+		watchListFilm: state.watchListFilm,
+		username :  data ? data.username : null,
+	});
+}
 
 const mapDispatchToProps = (dispatch) => ({
 	deleteWatchList: (id) => dispatch(deleteWatchList(id))

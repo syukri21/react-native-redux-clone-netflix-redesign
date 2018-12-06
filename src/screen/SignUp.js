@@ -1,17 +1,45 @@
 import React from 'react';
 import { Container, Content, Form, Label, Input, Icon, Item, CheckBox, Text, Button, View } from 'native-base';
 import LinearGradient from 'react-native-linear-gradient';
-import HeaderMod from '../components/HeaderMod';
-import Logo from '../components/Logo';
 import { BoxShadow } from 'react-native-shadow';
+
+import {connect} from 'react-redux';
+import {onAddUser} from '../actions/usersAction';
+
 import { styles } from './signup-style';
 import BackgroundImage from '../components/BackgroundImage';
+import HeaderMod from '../components/HeaderMod';
+import Logo from '../components/Logo';
+
+
 class SignUp extends React.Component {
 	state = {
-		check: false
+		check: false,
+		user : {
+			name: '',
+			email: '',
+			pass: '',
+			confirmPass : ''
+		}
 	};
 
+	addUser (){
+		this.props.addUser()
+	}
+
+	handleInput = (key, value) => {
+		this.setState({
+			user : {
+				...this.state.user,
+				[key] : value
+			}	
+		})
+	
+	}
+
+
 	render() {
+		let {user} = this.state
 		return (
 			<Container>
 				<HeaderMod register {...this.props}>
@@ -44,19 +72,24 @@ class SignUp extends React.Component {
 						<View cardBody tyle={styles.bgBlack}>
 							<Form style={styles.form}>
 								<Item floatingLabel last style={styles.itemInput}>
+									<Icon active name="person" style={styles.icon} />
+									<Label style={styles.float}>Username</Label>
+									<Input style={styles.input} onChangeText={(e) => this.handleInput('name', e )}   />
+								</Item>
+								<Item floatingLabel last style={styles.itemInput}>
 									<Icon active name="mail" style={styles.icon} />
-									<Label style={styles.float}>Email</Label>
-									<Input style={styles.input} />
+									<Label style={styles.float}  >Email</Label>
+									<Input style={styles.input} onChangeText={(e) => this.handleInput('email', e )}  />
 								</Item>
 								<Item floatingLabel last style={styles.itemInput}>
 									<Icon active name="eye" style={styles.icon} />
-									<Label style={styles.float}>Password</Label>
-									<Input style={styles.input} />
+									<Label style={styles.float}  >Password</Label>
+									<Input style={styles.input} onChangeText={(e) => this.handleInput('pass', e )} />
 								</Item>
 								<Item floatingLabel last style={styles.itemInput}>
 									<Icon active name="eye" style={styles.icon} />
 									<Label style={styles.float}>Confirm Password</Label>
-									<Input style={styles.input} />
+									<Input style={styles.input}  onChangeText={(e) => this.handleInput('confirmPass', e )}/>
 								</Item>
 							</Form>
 							<View
@@ -73,7 +106,7 @@ class SignUp extends React.Component {
 							</View>
 
 							<BoxShadow setting={shadowOpt}>
-								<Button full iconLeft style={styles.buttonSignUp}>
+								<Button disable full iconLeft style={styles.buttonSignUp} onPress={() => this.props.addUser(user.name, user.email, user.pass)}> 
 									<LinearGradient
 										colors={[
 											'#B7135C',
@@ -122,4 +155,10 @@ const shadowOpt = {
 	}
 };
 
-export default SignUp;
+
+
+const mapDispatchToProps = (dispatch) => ({
+	addUser : (id, email, password) => dispatch(onAddUser(id, email, password))
+})
+
+export default connect(null, mapDispatchToProps)(SignUp);

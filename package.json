@@ -16,6 +16,7 @@
     "react-native-floating-action": "^1.13.0",
     "react-native-gesture-handler": "^1.0.10",
     "react-native-grid-component": "^1.1.0",
+    "react-native-hide-show-password-input": "^1.0.7",
     "react-native-linear-gradient": "^2.5.3",
     "react-native-ratings": "^6.0.0",
     "react-native-shadow": "^1.2.2",

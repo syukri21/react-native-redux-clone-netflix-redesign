@@ -1,11 +1,28 @@
 import { film } from '../dataDummy';
 import { deleteWatchListReducer, addWatchListReducer, getOneWatchListById } from './watchListFilmReducer';
 import { searchFilmsReducer } from './searchListReducer';
+import {addUserReducer, loginUserReducer, logoutUserReducer} from './userReducer';
+
+
 let initState = {
 	film: film,
 	watchListFilm: film,
 	searchListFilm: [],
-	searchData: null
+	searchData: null,
+	users:[
+		{
+			username: 'uki',
+			password: 'uki',
+			isLogin: false
+		},
+		{
+			username: 'admin',
+			password: 'admin',
+			isLogin: false
+		},
+
+	],
+	isUserLoged : false
 };
 
 const rootReducer = (state = initState, action) => {
@@ -21,6 +38,12 @@ const rootReducer = (state = initState, action) => {
 			break;
 		case 'ON_SEARCH':
 			return searchFilmsReducer(state, action);
+			break;
+		case 'ON_LOGIN':
+			return loginUserReducer(state, action);
+			break;
+		case 'ON_LOGOUT':
+			return logoutUserReducer(state, action); 
 			break;
 		default:
 			return initState;

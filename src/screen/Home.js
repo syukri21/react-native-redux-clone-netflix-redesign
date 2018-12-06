@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 import HeaderMod from '../components/HeaderMod';
 import DrawerMod from '../components/DrawerMod';
 
+import * as Animatable from 'react-native-animatable';
+
 import { styles } from './home-style';
 
 class Home extends React.Component {
@@ -31,6 +33,7 @@ class Home extends React.Component {
 				key={i}
 				onPress={() => this.navigation.navigate('Detail', { itemId: data.id })}
 			>
+				<Animatable.View  style={styles.item} animation="zoomIn" duration={1000}>
 				<CardItem cardBody>
 					<Image style={styles.itemImage} source={data.gambar} resizeMode="cover" />
 				</CardItem>
@@ -43,16 +46,18 @@ class Home extends React.Component {
 						<Text style={styles.text}>{data.title}</Text>
 					</Button>
 				</CardItem>
+				</Animatable.View>
 			</TouchableOpacity>
 		);
 	}
 
 	render() {
-		const { film } = this.props;
+		const { film, username } = this.props;
+		console.log(this.props);
 		return (
 			<DrawerMod isOpen={this.state.isOpen} {...this.props}>
 				<Container style={styles.wrapper}>
-					<HeaderMod menu={true} toggleDrawer={this.toggleDrawer.bind(this)}>
+					<HeaderMod menu={true} toggleDrawer={this.toggleDrawer.bind(this)} add   title={username} >
 						Home
 					</HeaderMod>
 					<Content>
@@ -72,8 +77,12 @@ class Home extends React.Component {
 	}
 }
 
-const mapStateToProps = (state) => ({
-	film: state.film
-});
+const mapStateToProps = (state) => {
+	user = state.users.find(user => user.isLoged);
+	return({
+		film: state.film,
+		username : user ? user.username : null
+	})
+};
 
 export default connect(mapStateToProps)(Home);

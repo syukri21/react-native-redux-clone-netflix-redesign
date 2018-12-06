@@ -2,6 +2,12 @@ import React from 'react';
 import { Container, Content, CardItem, Button, Text } from 'native-base';
 import { StyleSheet, findNodeHandle, TouchableOpacity } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import {connect} from 'react-redux';
+
+
+import {onLogout} from '../actions/usersAction';
+
+
 import Logo from './Logo';
 import BackgroundImage from './BackgroundImage';
 
@@ -29,6 +35,12 @@ class Sidebar extends React.Component {
 	navigateTo(to) {
 		this.closeDrawer();
 		this.props.navigation.navigate(to);
+	}
+
+	logout(){
+		this.props.onLogout()
+		this.navigation.navigate('Login');
+
 	}
 	render() {
 		let opt1 = this.props.watchList ? 'Home' : 'WatchList';
@@ -62,7 +74,7 @@ class Sidebar extends React.Component {
 					>
 						<Text style={styles.textButton}>{opt1.toUpperCase()}</Text>
 					</TouchableOpacity>
-					<Button full style={styles.button} onPress={() => this.navigateTo('Login')}>
+					<Button full style={styles.button} onPress={() => this.logout()}>
 						<Text style={styles.textButton}>LOGOUT</Text>
 					</Button>
 				</Content>
@@ -99,4 +111,17 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default Sidebar;
+
+const mapStateToProps = (state) => {
+	let data = state.users.find(user => user.active);
+
+	return({
+		username : data ? data.username : null
+	})
+}
+
+
+const mapDispatchToProps = (dispatch) => ({
+	onLogout : () => dispatch(onLogout())
+})
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
