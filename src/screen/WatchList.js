@@ -24,6 +24,8 @@ import { deleteWatchList } from '../actions/watchListAction';
 import HeaderMod from '../components/HeaderMod';
 import DrawerMod from '../components/DrawerMod';
 import LinearGradient from 'react-native-linear-gradient';
+import * as Animatable from 'react-native-animatable';
+import FloatButton from '../components/FloatButton';
 
 class WatchList extends React.Component {
 	constructor(props) {
@@ -101,44 +103,7 @@ class WatchList extends React.Component {
 						/>
 					</Content>
 
-					<FloatingAction
-						overlayColor="rgba(0,0,0,0.8)"
-						color="#B7135C"
-						showBackground={false}
-						floatingIcon={
-							<View>
-								<LinearGradient
-									colors={[
-										'#B3155F',
-										'#454DB0'
-									]}
-									style={{
-										height: 80,
-										position: 'absolute',
-										top: 0,
-										left: 0,
-										bottom: 0,
-										right: 0,
-										transform: [
-											{ translateY: -20 },
-											{ translateX: -20 }
-										],
-										width: 80
-									}}
-									start={{
-										x: 0,
-										y: 0
-									}}
-									end={{
-										x: 1,
-										y: 0
-									}}
-								/>
-								<Icon style={{ color: 'white' }} active name="add" />
-							</View>
-						}
-						onPressMain={() => this.props.navigation.navigate('Search')}
-					/>
+					<FloatButton {...this.props} />
 				</Container>
 			</DrawerMod>
 		);

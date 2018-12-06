@@ -1,9 +1,10 @@
 import React from 'react';
 import { Container, Content, CardItem, Button, Text } from 'native-base';
-import { StyleSheet, findNodeHandle } from 'react-native';
+import { StyleSheet, findNodeHandle, TouchableOpacity } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Logo from './Logo';
 import BackgroundImage from './BackgroundImage';
+
 class Sidebar extends React.Component {
 	constructor(props) {
 		super(props);
@@ -55,11 +56,14 @@ class Sidebar extends React.Component {
 					<CardItem style={{ backgroundColor: 'black', justifyContent: 'center' }}>
 						<Logo />
 					</CardItem>
-					<Button full style={styles.button} onPress={() => this.navigateTo(opt1)}>
-						<Text>{opt1}</Text>
-					</Button>
+					<TouchableOpacity
+						onPress={() => this.navigateTo(opt1)}
+						style={{ flex: 1, height: 60, width: '100%', alignItems: 'center', justifyContent: 'center' }}
+					>
+						<Text style={styles.textButton}>{opt1.toUpperCase()}</Text>
+					</TouchableOpacity>
 					<Button full style={styles.button} onPress={() => this.navigateTo('Login')}>
-						<Text>LOGOUT</Text>
+						<Text style={styles.textButton}>LOGOUT</Text>
 					</Button>
 				</Content>
 			</Container>
@@ -78,7 +82,13 @@ const styles = StyleSheet.create({
 	},
 	button: {
 		flex: 1,
-		backgroundColor: '#B7135C'
+		backgroundColor: 'transparent',
+		height: 50,
+		color: 'white'
+	},
+	textButton: {
+		fontSize: 20,
+		color: 'white'
 	},
 	absolute: {
 		position: 'absolute',
