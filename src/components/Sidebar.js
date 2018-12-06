@@ -5,9 +5,15 @@ import LinearGradient from 'react-native-linear-gradient';
 import Logo from './Logo';
 import BackgroundImage from './BackgroundImage';
 class Sidebar extends React.Component {
-	state = {
-		viewRef: null
-	};
+	constructor(props) {
+		super(props);
+		this.state = {
+			viewRef: null
+		};
+
+		this.navigation = props.navigation;
+		this.closeDrawer = props.closeDrawer;
+	}
 
 	imageLoaded() {
 		this.setState({
@@ -18,6 +24,11 @@ class Sidebar extends React.Component {
 	blurViewLoad = () => (
 		<BlurView style={styles.absolute} blurType="dark" blurAmount={1} viewRef={this.state.viewRef} />
 	);
+
+	navigateTo(to) {
+		this.closeDrawer();
+		this.props.navigation.navigate(to);
+	}
 	render() {
 		let opt1 = this.props.watchList ? 'Home' : 'WatchList';
 		return (
@@ -44,10 +55,10 @@ class Sidebar extends React.Component {
 					<CardItem style={{ backgroundColor: 'black', justifyContent: 'center' }}>
 						<Logo />
 					</CardItem>
-					<Button full style={styles.button} onPress={() => this.props.navigation.navigate(opt1)}>
+					<Button full style={styles.button} onPress={() => this.navigateTo(opt1)}>
 						<Text>{opt1}</Text>
 					</Button>
-					<Button full style={styles.button} onPress={() => this.props.navigation.navigate('Login')}>
+					<Button full style={styles.button} onPress={() => this.navigateTo('Login')}>
 						<Text>LOGOUT</Text>
 					</Button>
 				</Content>

@@ -12,6 +12,7 @@
     "react-native": "0.57.7",
     "react-native-blur": "^3.2.2",
     "react-native-drawer": "^2.5.1",
+    "react-native-floating-action": "^1.13.0",
     "react-native-gesture-handler": "^1.0.10",
     "react-native-grid-component": "^1.1.0",
     "react-native-linear-gradient": "^2.5.3",

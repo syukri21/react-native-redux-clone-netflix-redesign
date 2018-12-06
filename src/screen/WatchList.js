@@ -8,20 +8,21 @@ import {
 	Text,
 	Icon,
 	Button,
-	ListItem,
 	List,
 	CardItem,
 	Card,
 	Left,
-	Body
+	Body,
+	Footer,
+	FooterTab
 } from 'native-base';
 import { ListView, Image, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
+import { FloatingAction } from 'react-native-floating-action';
 
 import { deleteWatchList } from '../actions/watchListAction';
 import HeaderMod from '../components/HeaderMod';
 import DrawerMod from '../components/DrawerMod';
-import BackgroundImage from '../components/BackgroundImage';
 import LinearGradient from 'react-native-linear-gradient';
 
 class WatchList extends React.Component {
@@ -33,7 +34,6 @@ class WatchList extends React.Component {
 			ds: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 		};
 		this.navigation = props.navigation;
-		this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 	}
 
 	toggleDrawer() {
@@ -85,7 +85,7 @@ class WatchList extends React.Component {
 		return (
 			<DrawerMod isOpen={this.state.isOpen} watchList {...this.props}>
 				<Container style={{ backgroundColor: 'transparent' }}>
-					<HeaderMod {...this.props} menu={true} toggleDrawer={this.toggleDrawer.bind(this)} add>
+					<HeaderMod {...this.props} menu={true} toggleDrawer={this.toggleDrawer.bind(this)}>
 						My Watchlist
 					</HeaderMod>
 					<Content style={{ backgroundColor: 'black' }}>
@@ -100,6 +100,45 @@ class WatchList extends React.Component {
 							)}
 						/>
 					</Content>
+
+					<FloatingAction
+						overlayColor="rgba(0,0,0,0.8)"
+						color="#B7135C"
+						showBackground={false}
+						floatingIcon={
+							<View>
+								<LinearGradient
+									colors={[
+										'#B3155F',
+										'#454DB0'
+									]}
+									style={{
+										height: 80,
+										position: 'absolute',
+										top: 0,
+										left: 0,
+										bottom: 0,
+										right: 0,
+										transform: [
+											{ translateY: -20 },
+											{ translateX: -20 }
+										],
+										width: 80
+									}}
+									start={{
+										x: 0,
+										y: 0
+									}}
+									end={{
+										x: 1,
+										y: 0
+									}}
+								/>
+								<Icon style={{ color: 'white' }} active name="add" />
+							</View>
+						}
+						onPressMain={() => this.props.navigation.navigate('Search')}
+					/>
 				</Container>
 			</DrawerMod>
 		);

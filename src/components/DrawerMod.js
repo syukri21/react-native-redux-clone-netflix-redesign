@@ -22,11 +22,10 @@ class DrawerMod extends Component {
 				ref={(ref) => {
 					this.drawer = ref;
 				}}
-				content={<Sidebar {...this.props} />}
+				content={<Sidebar {...this.props} closeDrawer={this.closeDrawer.bind(this)} />}
 				tapToClose={true}
 				openDrawerOffset={100}
 				type="static"
-				tweenHandler={Drawer.tweenPresets.parallax}
 			>
 				{this.props.children}
 			</Drawer>
@@ -43,5 +42,4 @@ const styles = StyleSheet.create({
 		right: 0
 	}
 });
-
 export default DrawerMod;
