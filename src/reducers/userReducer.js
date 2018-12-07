@@ -1,23 +1,22 @@
 import { users } from '../userDataDummy';
 
 const authUser = (state, action) => {
-	let username = state.users.find((user) => (action.username = user.username));
-	let email = state.users.find((user) => (action.email = user.email));
+	let username = state.users.find((user) => action.username == user.username);
+	let email = state.users.find((user) => action.email == user.email);
 
-	alert(action.username);
-	if (username === undefined) {
+	if (username == undefined) {
 		alert('Username sudah ada cari nama lain !');
 		return false;
-	} else if (email === undefined) {
+	} else if (email == undefined) {
 		alert('Email sudah terpakai gunakan email lain !');
 		return false;
-	} else if (action.username === undefined || action.username === '') {
+	} else if (action.username == undefined || action.username == '') {
 		alert('Isi username terlebih dahulu');
 		return false;
-	} else if (action.email === undefined || action.email === '') {
+	} else if (action.email == undefined || action.email == '') {
 		alert('Isi email terlebih dahulu');
 		return false;
-	} else if (action.password === undefined || action.password === '') {
+	} else if (action.password == undefined || action.password === '') {
 		alert('Isi password terlebih dahulu');
 		return false;
 	}

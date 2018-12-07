@@ -5,7 +5,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { View, Image } from 'react-native';
 import { connect } from 'react-redux';
 
-import { styles } from './headerModeStyle';
+import { styles, linearGradientConfig, buttonConfig } from './headerModeStyle';
 
 class HeaderMod extends React.Component {
 	constructor(props) {
@@ -14,57 +14,45 @@ class HeaderMod extends React.Component {
 	}
 	buttonMenu() {
 		return (
-			<Button transparent light style={styles.buttonBack} iconLeft onPress={() => this.props.toggleDrawer()}>
-				<Icon active name="md-menu" />
+			<Button
+				{...buttonConfig}
+				style={styles.buttonBack}
+				onPress={() => this.props.toggleDrawer()}
+			>
+				<Icon active name='md-menu' />
 			</Button>
 		);
 	}
 
 	buttonBack() {
 		return (
-			<Button transparent light style={styles.buttonBack} iconLeft onPress={() => this.props.navigation.goBack()}>
-				<Icon active name="md-arrow-back" />
+			<Button
+				{...buttonConfig}
+				style={styles.buttonBack}
+				onPress={() => this.props.navigation.goBack()}
+			>
+				<Icon active name='md-arrow-back' />
 			</Button>
 		);
 	}
 
 	buttonProfile() {
 		return (
-			<Button transparent light iconRight style={styles.buttonAdd}>
+			<Button {...buttonConfig} iconRight style={styles.buttonAdd}>
 				<Text>{this.user.username}</Text>
-				<Image style={{ height: 50, width: 50, borderRadius: 40, marginRight: 10 }} source={this.user.image} />
+				<Image style={styles.imageProfil} source={this.user.image} />
 			</Button>
 		);
 	}
 
 	render() {
 		return (
-			<View style={{ position: 'relative', top: 0, left: 0, zIndex: 1000 }}>
-				<LinearGradient
-					colors={[
-						'#020203',
-						'#020203'
-					]}
-					style={{
-						height: 80,
-						position: 'absolute',
-						top: 0,
-						left: 0,
-						width: '100%'
-					}}
-					start={{
-						x: 0,
-						y: 0
-					}}
-					end={{
-						x: 1,
-						y: 0
-					}}
-				/>
+			<View style={styles.view}>
+				<LinearGradient style={styles.linearGradient} {...linearGradientConfig} />
 				<Header style={styles.header}>
 					{this.props.menu ? this.buttonMenu() : this.buttonBack()}
 					<Text style={styles.headerText}>{this.props.children}</Text>
-					{this.props.add && this.buttonProfile()}
+					{this.props.profile && this.buttonProfile()}
 				</Header>
 			</View>
 		);
@@ -74,9 +62,9 @@ class HeaderMod extends React.Component {
 const mapStateToProps = (state) => {
 	let user = state.users.find((user) => user.isLoged);
 	return {
-		user: {
-			username: user ? user.username : null,
-			image: user ? user.image : null
+		user : {
+			username : user ? user.username : null,
+			image    : user ? user.image : null
 		}
 	};
 };

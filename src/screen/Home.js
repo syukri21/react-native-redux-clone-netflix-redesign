@@ -1,7 +1,14 @@
 import React from 'react';
 import { Image, View, TouchableOpacity } from 'react-native';
 import Grid from 'react-native-grid-component';
-import { Container, Content, CardItem, Text, Button, Drawer } from 'native-base';
+import {
+	Container,
+	Content,
+	CardItem,
+	Text,
+	Button,
+	Drawer
+} from 'native-base';
 import { connect } from 'react-redux';
 
 import HeaderMod from '../components/HeaderMod';
@@ -15,14 +22,14 @@ class Home extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isOpen: false
+			isOpen : false
 		};
 		this.navigation = props.navigation;
 	}
 
 	toggleDrawer() {
 		this.setState({
-			isOpen: true
+			isOpen : true
 		});
 	}
 
@@ -31,21 +38,33 @@ class Home extends React.Component {
 			<TouchableOpacity
 				style={styles.item}
 				key={i}
-				onPress={() => this.navigation.navigate('Detail', { itemId: data.id })}
+				onPress={() =>
+					this.navigation.navigate('Detail', { itemId: data.id })}
 			>
-				<Animatable.View  style={styles.item} animation="zoomIn" duration={1000}>
-				<CardItem cardBody>
-					<Image style={styles.itemImage} source={data.gambar} resizeMode="cover" />
-				</CardItem>
-				<CardItem cardBody style={styles.cardContent}>
-					<Button
-						full
-						style={styles.button}
-						onPress={() => this.navigation.navigate('Detail', { itemId: data.id })}
-					>
-						<Text style={styles.text}>{data.title}</Text>
-					</Button>
-				</CardItem>
+				<Animatable.View
+					style={styles.item}
+					animation='zoomIn'
+					duration={1000}
+				>
+					<CardItem cardBody>
+						<Image
+							style={styles.itemImage}
+							source={data.gambar}
+							resizeMode='cover'
+						/>
+					</CardItem>
+					<CardItem cardBody style={styles.cardContent}>
+						<Button
+							full
+							style={styles.button}
+							onPress={() =>
+								this.navigation.navigate('Detail', {
+									itemId: data.id
+								})}
+						>
+							<Text style={styles.text}>{data.title}</Text>
+						</Button>
+					</CardItem>
 				</Animatable.View>
 			</TouchableOpacity>
 		);
@@ -57,7 +76,11 @@ class Home extends React.Component {
 		return (
 			<DrawerMod isOpen={this.state.isOpen} {...this.props}>
 				<Container style={styles.wrapper}>
-					<HeaderMod menu={true} toggleDrawer={this.toggleDrawer.bind(this)} add   title={username} >
+					<HeaderMod
+						menu={true}
+						toggleDrawer={this.toggleDrawer.bind(this)}
+						profile
+					>
 						Home
 					</HeaderMod>
 					<Content>
@@ -78,11 +101,11 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-	user = state.users.find(user => user.isLoged);
-	return({
-		film: state.film,
+	user = state.users.find((user) => user.isLoged);
+	return {
+		film     : state.film,
 		username : user ? user.username : null
-	})
+	};
 };
 
 export default connect(mapStateToProps)(Home);
