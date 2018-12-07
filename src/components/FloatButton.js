@@ -4,7 +4,7 @@ import { FloatingAction } from 'react-native-floating-action';
 import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
 import { Icon, View } from 'native-base';
-import { TouchableOpacity } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 class FloatButton extends React.Component {
 	constructor(props) {
@@ -20,20 +20,14 @@ class FloatButton extends React.Component {
 				({ finished }) =>
 					finished && this.navigation.navigate('Search') && this.closeDrawer()
 			);
+
 	render() {
 		return (
 			<Animatable.View
 				animation='bounceInDown'
 				duration={1000}
 				easing='ease-in-out-sine'
-				style={{
-					position        : 'absolute',
-					bottom          : 0,
-					right           : 0,
-					width           : 100,
-					height          : 100,
-					backgroundColor : 'transparent'
-				}}
+				style={styles.animatedView}
 				ref={(ref) => (this.btn = ref)}
 			>
 				<FloatingAction
@@ -52,6 +46,17 @@ class FloatButton extends React.Component {
 		);
 	}
 }
+
+const styles = StyleSheet.create({
+	animatedView : {
+		position        : 'absolute',
+		bottom          : 0,
+		right           : 0,
+		width           : 100,
+		height          : 100,
+		backgroundColor : 'transparent'
+	}
+});
 
 const linearGradientConfig = {
 	style  : {

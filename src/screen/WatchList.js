@@ -1,14 +1,5 @@
 import React from 'react';
-import {
-	Container,
-	Content,
-	Text,
-	Icon,
-	Button,
-	List,
-	CardItem,
-	Left
-} from 'native-base';
+import { Container, Content, Text, Icon, Button, List, CardItem, Left } from 'native-base';
 import { ListView, Image, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import * as Animatable from 'react-native-animatable';
@@ -103,15 +94,12 @@ class WatchList extends React.Component {
 						<List
 							renderRow={(data) => this.renderItem(data)}
 							rightOpenValue={-100}
-							dataSource={this.state.ds.cloneWithRows(
-								this.props.watchListFilm
-							)}
+							dataSource={this.state.ds.cloneWithRows(this.props.watchListFilm)}
 							renderRightHiddenRow={(data, secId, rowId, rowMap) => (
 								<Button
 									full
 									danger
-									onPress={() =>
-										this.handleDelete(secId, rowId, rowMap, data.id)}
+									onPress={() => this.handleDelete(secId, rowId, rowMap, data.id)}
 								>
 									<Icon active name='trash' />
 								</Button>
@@ -119,10 +107,7 @@ class WatchList extends React.Component {
 							style={styles.transparent}
 						/>
 					</Content>
-					<FloatButton
-						{...this.props}
-						closeDrawer={this.closeDrawer.bind(this)}
-					/>
+					<FloatButton {...this.props} closeDrawer={this.closeDrawer.bind(this)} />
 				</Container>
 			</DrawerMod>
 		);

@@ -34,35 +34,8 @@ class Search extends React.Component {
 		this.navigation = props.navigation;
 	}
 
-	renderItem = (item) => {
-		return (
-			<TouchableOpacity
-				last
-				style={{}}
-				onPress={() => this.props.navigation.navigate('Detail', { itemId: item.id })}
-				key={item.id}
-			>
-				<View style={{ flex: 1, margin: 0, padding: 0, flexDirection: 'row' }}>
-					<CardItem style={{ flex: 2, padding: 0, backgroundColor: 'green' }} cardBody>
-						<Image
-							source={item.gambar}
-							style={{ width: '100%', height: 100, flex: 1 }}
-						/>
-					</CardItem>
-					<CardItem
-						style={{
-							flex            : 4,
-							backgroundColor : '#222',
-							borderRadius    : 0
-						}}
-					>
-						<Left>
-							<Text style={{ color: 'white' }}>{item.title}</Text>
-						</Left>
-					</CardItem>
-				</View>
-			</TouchableOpacity>
-		);
+	changeScreen = (id) => () => {
+		this.props.navigation.navigate('Detail', { itemId: id });
 	};
 
 	handleAdd = (id) => () => {
@@ -70,7 +43,38 @@ class Search extends React.Component {
 		this.navigation.navigate('WatchList');
 	};
 
-	rightHiddenItem = (data) => (
+	renderItem = (item) => {
+		return (
+			<TouchableOpacity last onPress={this.changeScreen(item.id)} key={item.id}>
+				<View style={styles.viewItemSearch}>
+					<CardItem style={styles.cardImageItemSearch} cardBody>
+						<Image source={item.gambar} style={styles.imageItemSearch} />
+					</CardItem>
+					<CardItem style={styles.titleItemSearch}>
+						<Left>
+							<Text style={styles.white}>{item.title}</Text>
+						</Left>
+					</CardItem>
+				</View>
+			</TouchableOpacity>
+		);
+	};
+
+	renderItems = () =>
+		this.props.searchListFilm.length !== 0 ? (
+			<List
+				renderRow={this.renderItem}
+				rightOpenValue={-100}
+				dataSource={this.state.ds.cloneWithRows(this.props.searchListFilm)}
+				renderRightHiddenRow={this.renderRightHiddenItem}
+			/>
+		) : (
+			<Body style={{ paddingTop: 40 }}>
+				<Text style={{ color: 'white' }}>Cari Film yang anda suka!</Text>
+			</Body>
+		);
+
+	renderRightHiddenItem = (data) => (
 		<Button full success onPress={this.handleAdd(data.id)}>
 			<Icon active name='add' />
 		</Button>
@@ -87,29 +91,10 @@ class Search extends React.Component {
 							onChangeText={this.props.onSearch}
 							placeholder='Search'
 						/>
-						<Icon
-							style={[
-								styles.icon,
-								styles.iconSearch
-							]}
-							name='md-search'
-						/>
+						<Icon style={styles.iconSearch} name='md-search' />
 					</Item>
 				</Header>
-				<Content style={styles.content}>
-					{this.props.searchListFilm.length !== 0 ? (
-						<List
-							renderRow={this.renderItem}
-							rightOpenValue={-100}
-							dataSource={this.state.ds.cloneWithRows(this.props.searchListFilm)}
-							renderRightHiddenRow={this.rightHiddenItem}
-						/>
-					) : (
-						<Body style={{ paddingTop: 40 }}>
-							<Text style={{ color: 'white' }}>Cari Film yang anda suka!</Text>
-						</Body>
-					)}
-				</Content>
+				<Content style={styles.content}>{this.renderItems()}</Content>
 			</Container>
 		);
 	}
