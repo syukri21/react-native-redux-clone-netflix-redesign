@@ -1,14 +1,7 @@
 import React from 'react';
 import { Image, View, TouchableOpacity } from 'react-native';
 import Grid from 'react-native-grid-component';
-import {
-	Container,
-	Content,
-	CardItem,
-	Text,
-	Button,
-	Drawer
-} from 'native-base';
+import { Container, Content, CardItem, Text, Button } from 'native-base';
 import { connect } from 'react-redux';
 
 import HeaderMod from '../components/HeaderMod';
@@ -33,54 +26,36 @@ class Home extends React.Component {
 		});
 	}
 
-	renderItem(data, i) {
+	changeScreen = (to, id) => () => this.navigation.navigate(to, { itemId: id });
+
+	renderItem = (data, i) => {
 		return (
 			<TouchableOpacity
 				style={styles.item}
 				key={i}
-				onPress={() =>
-					this.navigation.navigate('Detail', { itemId: data.id })}
+				onPress={this.changeScreen('Detail', data.id)}
 			>
-				<Animatable.View
-					style={styles.item}
-					animation='zoomIn'
-					duration={1000}
-				>
+				<Animatable.View style={styles.item} animation='zoomIn' duration={1000}>
 					<CardItem cardBody>
-						<Image
-							style={styles.itemImage}
-							source={data.gambar}
-							resizeMode='cover'
-						/>
+						<Image style={styles.itemImage} source={data.gambar} resizeMode='cover' />
 					</CardItem>
 					<CardItem cardBody style={styles.cardContent}>
-						<Button
-							full
-							style={styles.button}
-							onPress={() =>
-								this.navigation.navigate('Detail', {
-									itemId: data.id
-								})}
-						>
+						<Button full style={styles.button}>
 							<Text style={styles.text}>{data.title}</Text>
 						</Button>
 					</CardItem>
 				</Animatable.View>
 			</TouchableOpacity>
 		);
-	}
+	};
 
 	render() {
-		const { film, username } = this.props;
+		const { film } = this.props;
 		console.log(this.props);
 		return (
 			<DrawerMod isOpen={this.state.isOpen} {...this.props}>
 				<Container style={styles.wrapper}>
-					<HeaderMod
-						menu={true}
-						toggleDrawer={this.toggleDrawer.bind(this)}
-						profile
-					>
+					<HeaderMod menu={true} toggleDrawer={this.toggleDrawer.bind(this)} profile>
 						Home
 					</HeaderMod>
 					<Content>

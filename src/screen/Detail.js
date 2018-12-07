@@ -1,15 +1,5 @@
 import React from 'react';
-import {
-	Container,
-	Content,
-	Text,
-	Button,
-	Icon,
-	Card,
-	CardItem,
-	Body,
-	View
-} from 'native-base';
+import { Container, Content, Text, Button, Icon, Card, CardItem, Body, View } from 'native-base';
 import { Rating } from 'react-native-ratings';
 import { Image } from 'react-native';
 
@@ -18,13 +8,7 @@ import { addWatchList } from '../actions/watchListAction';
 
 import ButtonIconGroup from '../components/ButtonIconGroup';
 
-import {
-	styles,
-	ratingCongig,
-	heartConfig,
-	iconAddConfig,
-	topImageConfig
-} from './detail-style';
+import { styles, ratingCongig, heartConfig, iconAddConfig, topImageConfig } from './detail-style';
 
 class Detail extends React.Component {
 	state = {
@@ -51,7 +35,7 @@ class Detail extends React.Component {
 						</View>
 					</View>
 					<View style={styles.viewButton2}>
-						<Button transparent light onPress={() => navigation.goBack()}>
+						<Button transparent light>
 							<Icon {...iconAddConfig} />
 						</Button>
 						<Button transparent danger onPress={this.handleAdd(data.id)}>
@@ -82,20 +66,12 @@ class Detail extends React.Component {
 						</CardItem>
 						<CardItem style={styles.cardItem}>
 							<View style={styles.viewTanggalRilis}>
-								<Text style={styles.textTanggalRilisLabelLeft}>
-									Tanggal RIlis
-								</Text>
-								<Text style={styles.textTanggalRilis}>
-									{data.tanggalRilis}
-								</Text>
+								<Text style={styles.textTanggalRilisLabelLeft}>Tanggal RIlis</Text>
+								<Text style={styles.textTanggalRilis}>{data.tanggalRilis}</Text>
 							</View>
 							<View>
-								<Text style={styles.textTanggalRilisLabelRight}>
-									Sutradara
-								</Text>
-								<Text style={styles.textTanggalRilis}>
-									{data.sutradara}
-								</Text>
+								<Text style={styles.textTanggalRilisLabelRight}>Sutradara</Text>
+								<Text style={styles.textTanggalRilis}>{data.sutradara}</Text>
 							</View>
 						</CardItem>
 					</Card>

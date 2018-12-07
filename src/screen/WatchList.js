@@ -24,26 +24,28 @@ class WatchList extends React.Component {
 		this.navigation = props.navigation;
 	}
 
-	openDrawer() {
+	openDrawer = () => {
 		this.setState({
 			isOpen : true
 		});
-	}
+	};
 
 	closeDrawer = () =>
 		this.setState({
 			isOpen : false
 		});
 
-	renderItem(item) {
+	changeScreen = (to, itemId) => () =>
+		this.props.navigation.navigate(to, {
+			itemId
+		});
+
+	renderItem = (item) => {
 		return (
 			<TouchableOpacity
 				last
 				style={styles.black}
-				onPress={() =>
-					this.props.navigation.navigate('Detail', {
-						itemId : item.id
-					})}
+				onPress={this.changeScreen('Detail', item.id)}
 				key={item.id}
 			>
 				<Animatable.View
@@ -63,9 +65,9 @@ class WatchList extends React.Component {
 				</Animatable.View>
 			</TouchableOpacity>
 		);
-	}
+	};
 
-	handleDelete(secId, rowId, rowMap, id) {
+	handleDelete = (secId, rowId, rowMap, id) => () => {
 		this.props.deleteWatchList(id);
 		rowMap[`${secId}${rowId}`].props.closeRow();
 		const newData = [
@@ -73,7 +75,13 @@ class WatchList extends React.Component {
 		];
 		newData.splice(rowId, 1);
 		this.setState({ listViewData: newData });
-	}
+	};
+
+	renderRightHiddenRow = (data, secId, rowId, rowMap) => (
+		<Button full danger onPress={this.handleDelete(secId, rowId, rowMap, data.id)}>
+			<Icon active name='trash' />
+		</Button>
+	);
 
 	render() {
 		const ds = new ListView.DataSource({
@@ -82,32 +90,19 @@ class WatchList extends React.Component {
 		return (
 			<DrawerMod isOpen={this.state.isOpen} watchList {...this.props}>
 				<Container>
-					<HeaderMod
-						{...this.props}
-						menu
-						toggleDrawer={this.openDrawer.bind(this)}
-						profile
-					>
+					<HeaderMod {...this.props} menu toggleDrawer={this.openDrawer} profile>
 						My Watchlist
 					</HeaderMod>
 					<Content style={styles.black}>
 						<List
-							renderRow={(data) => this.renderItem(data)}
+							renderRow={this.renderItem}
 							rightOpenValue={-100}
 							dataSource={this.state.ds.cloneWithRows(this.props.watchListFilm)}
-							renderRightHiddenRow={(data, secId, rowId, rowMap) => (
-								<Button
-									full
-									danger
-									onPress={() => this.handleDelete(secId, rowId, rowMap, data.id)}
-								>
-									<Icon active name='trash' />
-								</Button>
-							)}
+							renderRightHiddenRow={this.renderRightHiddenRow}
 							style={styles.transparent}
 						/>
 					</Content>
-					<FloatButton {...this.props} closeDrawer={this.closeDrawer.bind(this)} />
+					<FloatButton {...this.props} closeDrawer={this.closeDrawer} />
 				</Container>
 			</DrawerMod>
 		);

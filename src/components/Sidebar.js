@@ -40,10 +40,10 @@ class Sidebar extends React.Component {
 		this.props.navigation.navigate(to);
 	};
 
-	logout() {
+	logout = () => {
 		this.props.onLogout();
 		this.navigation.navigate('Login');
-	}
+	};
 	render() {
 		let opt1 = this.props.watchList ? 'Home' : 'WatchList';
 		return (
