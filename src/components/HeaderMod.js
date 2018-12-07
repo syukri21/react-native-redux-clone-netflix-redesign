@@ -11,26 +11,25 @@ class HeaderMod extends React.Component {
 	constructor(props) {
 		super(props);
 		this.user = this.props.user;
+		this.navigation = props.navigation;
 	}
 	buttonMenu() {
 		return (
 			<Button
 				{...buttonConfig}
 				style={styles.buttonBack}
-				onPress={() => this.props.toggleDrawer()}
+				onPress={this.props.toggleDrawer}
 			>
 				<Icon active name='md-menu' />
 			</Button>
 		);
 	}
 
+	goBack = () => this.props.navigation.goBack();
+
 	buttonBack() {
 		return (
-			<Button
-				{...buttonConfig}
-				style={styles.buttonBack}
-				onPress={() => this.props.navigation.goBack()}
-			>
+			<Button {...buttonConfig} style={styles.buttonBack} onPress={this.goBack}>
 				<Icon active name='md-arrow-back' />
 			</Button>
 		);
