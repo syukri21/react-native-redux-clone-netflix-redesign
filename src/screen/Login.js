@@ -24,7 +24,7 @@ import BackgroundImage from '../components/BackgroundImage';
 import {
 	styles,
 	backgroundLinearGradientConfig,
-	buttomLinearGradientConfig,
+	buttonLinearGradientConfig,
 	shadowOpt,
 	buttonLoginConfig
 } from './login-style';
@@ -105,14 +105,14 @@ class Login extends Component {
 						</TouchableOpacity>
 						<BoxShadow setting={shadowOpt}>
 							<Button {...buttonLoginConfig} onPress={this.handleLogin}>
-								<LinearGradient {...buttomLinearGradientConfig} />
+								<LinearGradient {...buttonLinearGradientConfig} />
 								<Text style={styles.textSignIn}>Log In</Text>
 							</Button>
 						</BoxShadow>
 					</View>
 				</Content>
 				<Footer style={styles.footer}>
-					<LinearGradient {...buttomLinearGradientConfig} />
+					<LinearGradient {...buttonLinearGradientConfig} />
 					<Button transparent onPress={this.changeScreen('SignUp')}>
 						<Text style={styles.buttonSignUp}>Sign up for free</Text>
 					</Button>

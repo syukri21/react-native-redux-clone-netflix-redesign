@@ -153,7 +153,7 @@ const shadowOpt = {
 	}
 };
 
-const buttomLinearGradientConfig = {
+const buttonLinearGradientConfig = {
 	start  : {
 		x : 0,
 		y : 1
@@ -173,7 +173,7 @@ const buttomLinearGradientConfig = {
 
 export {
 	styles,
-	buttomLinearGradientConfig,
+	buttonLinearGradientConfig,
 	shadowOpt,
 	backgroundLinearGradientConfig,
 	buttonLoginConfig
