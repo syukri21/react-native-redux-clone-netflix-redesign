@@ -4,6 +4,7 @@ import { Header, Button, Icon, Text, Badge } from 'native-base';
 import LinearGradient from 'react-native-linear-gradient';
 import { View, Image } from 'react-native';
 import { connect } from 'react-redux';
+import { onCloseDrawer, onOpenDraw } from '../actions/drawerAction';
 
 import { styles, linearGradientConfig, buttonConfig } from './headerModeStyle';
 
@@ -15,11 +16,7 @@ class HeaderMod extends React.Component {
 	}
 	buttonMenu() {
 		return (
-			<Button
-				{...buttonConfig}
-				style={styles.buttonBack}
-				onPress={this.props.toggleDrawer}
-			>
+			<Button {...buttonConfig} style={styles.buttonBack} onPress={this.props.onOpenDraw}>
 				<Icon active name='md-menu' />
 			</Button>
 		);
@@ -69,4 +66,8 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps)(HeaderMod);
+const mapDispatchToProps = (dispatchEvent) => ({
+	onCloseDrawer : () => dispatchEvent(onCloseDrawer()),
+	onOpenDraw    : () => dispatchEvent(onOpenDraw())
+});
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderMod);

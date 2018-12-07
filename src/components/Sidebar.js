@@ -5,6 +5,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { connect } from 'react-redux';
 
 import { onLogout } from '../actions/usersAction';
+import { onCloseDraw, onOpenDraw } from '../actions/drawerAction';
 
 import Logo from './Logo';
 import BackgroundImage from './BackgroundImage';
@@ -17,7 +18,7 @@ class Sidebar extends React.Component {
 		};
 
 		this.navigation = props.navigation;
-		this.closeDrawer = props.closeDrawer;
+		this.closeDrawer = props.onCloseDraw;
 	}
 
 	imageLoaded() {
@@ -41,6 +42,7 @@ class Sidebar extends React.Component {
 	};
 
 	logout = () => {
+		this.closeDrawer();
 		this.props.onLogout();
 		this.navigation.navigate('Login');
 	};
@@ -129,6 +131,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-	onLogout : () => dispatch(onLogout())
+	onLogout    : () => dispatch(onLogout()),
+	onCloseDraw : () => dispatch(onCloseDraw()),
+	onOpenDraw  : () => dispatch(onOpenDraw())
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

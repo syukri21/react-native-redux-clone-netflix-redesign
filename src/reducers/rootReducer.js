@@ -3,14 +3,15 @@ import { users } from '../userDataDummy';
 import { deleteWatchListReducer, addWatchListReducer } from './watchListFilmReducer';
 import { searchFilmsReducer } from './searchListReducer';
 import { loginUserReducer, logoutUserReducer } from './userReducer';
-
+import { closeDrawReducer, openDrawReducer } from './drawerReducer';
 let initState = {
 	film           : film,
 	watchListFilm  : [],
 	searchListFilm : [],
 	searchData     : null,
 	users          : users,
-	isUserLoged    : false
+	isUserLoged    : false,
+	drawOpen       : false
 };
 
 const rootReducer = (state = initState, action) => {
@@ -32,6 +33,12 @@ const rootReducer = (state = initState, action) => {
 			break;
 		case 'ON_LOGOUT':
 			return logoutUserReducer(state, action);
+			break;
+		case 'ON_OPEN_DRAWER':
+			return openDrawReducer(state, action);
+			break;
+		case 'ON_CLOSE_DRAWER':
+			return closeDrawReducer(state, action);
 			break;
 		default:
 			return initState;
