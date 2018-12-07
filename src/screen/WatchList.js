@@ -84,9 +84,6 @@ class WatchList extends React.Component {
 	);
 
 	render() {
-		const ds = new ListView.DataSource({
-			rowHasChanged : (r1, r2) => r1 !== r2
-		});
 		return (
 			<DrawerMod isOpen={this.state.isOpen} watchList {...this.props}>
 				<Container>

@@ -35,7 +35,7 @@ class Search extends React.Component {
 	}
 
 	changeScreen = (id) => () => {
-		this.props.navigation.navigate('Detail', { itemId: id });
+		this.props.navigation.navigate('Detail', { id });
 	};
 
 	handleAdd = (id) => () => {

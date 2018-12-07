@@ -3,9 +3,11 @@ import { Image, View, TouchableOpacity } from 'react-native';
 import Grid from 'react-native-grid-component';
 import { Container, Content, CardItem, Text, Button } from 'native-base';
 import { connect } from 'react-redux';
+import { _ } from 'lodash';
 
 import HeaderMod from '../components/HeaderMod';
 import DrawerMod from '../components/DrawerMod';
+import HomeRenderItem from '../components/HomeRenderItem';
 
 import * as Animatable from 'react-native-animatable';
 
@@ -26,32 +28,12 @@ class Home extends React.Component {
 		});
 	}
 
-	changeScreen = (to, id) => () => this.navigation.navigate(to, { itemId: id });
-
 	renderItem = (data, i) => {
-		return (
-			<TouchableOpacity
-				style={styles.item}
-				key={i}
-				onPress={this.changeScreen('Detail', data.id)}
-			>
-				<Animatable.View style={styles.item} animation='zoomIn' duration={1000}>
-					<CardItem cardBody>
-						<Image style={styles.itemImage} source={data.gambar} resizeMode='cover' />
-					</CardItem>
-					<CardItem cardBody style={styles.cardContent}>
-						<Button full style={styles.button}>
-							<Text style={styles.text}>{data.title}</Text>
-						</Button>
-					</CardItem>
-				</Animatable.View>
-			</TouchableOpacity>
-		);
+		return <HomeRenderItem data={data} key={i} navigation={this.navigation} />;
 	};
 
 	render() {
 		const { film } = this.props;
-		console.log(this.props);
 		return (
 			<DrawerMod isOpen={this.state.isOpen} {...this.props}>
 				<Container style={styles.wrapper}>
@@ -76,10 +58,12 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-	user = state.users.find((user) => user.isLoged);
+	let user = state.users.find((user) => user.isLoged);
+	let watchFilmId = state.watchListFilm.map((item) => item.id);
 	return {
-		film     : state.film,
-		username : user ? user.username : null
+		film        : state.film,
+		username    : user ? user.username : null,
+		watchFilmId
 	};
 };
 
