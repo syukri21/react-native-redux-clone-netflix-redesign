@@ -6,7 +6,7 @@ import { loginUserReducer, logoutUserReducer } from './userReducer';
 
 let initState = {
 	film           : film,
-	watchListFilm  : film,
+	watchListFilm  : [],
 	searchListFilm : [],
 	searchData     : null,
 	users          : users,
