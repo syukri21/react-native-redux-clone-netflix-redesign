@@ -38,24 +38,23 @@ class Login extends Component {
 			password : ''
 		};
 		this.navigation = props.navigation;
-		this.onLogout = this.props.onLogout();
+		this.onLogout = this.props.onLogout;
 		this.onLogin = this.props.onLogin;
 	}
 
-	handleInput(key, value) {
-		this.setState({
-			...this.state,
+	handleInput = (key) => (value) =>
+		this.setState((prevState) => ({
+			...prevState,
 			[key] : value
-		});
-	}
+		}));
 
 	handleLogin = () => {
-		this.onLogout;
+		this.onLogout();
 		let { username, password } = this.state;
 		this.onLogin(username, password);
 	};
 
-	changeScreen = (to) => this.navigation.navigate(to);
+	changeScreen = (to) => () => this.navigation.navigate(to);
 
 	componentWillReceiveProps(nextProps) {
 		nextProps.isUserLoged && this.props.navigation.navigate('Home');
@@ -82,8 +81,7 @@ class Login extends Component {
 							<Label style={styles.label}>Email</Label>
 							<Input
 								style={styles.input}
-								onChangeText={(value) =>
-									this.handleInput('username', value)}
+								onChangeText={this.handleInput('username')}
 							/>
 						</Item>
 						<Item floatingLabel last style={styles.item}>
@@ -91,15 +89,14 @@ class Login extends Component {
 							<Label style={styles.label}>Password</Label>
 							<Input
 								style={styles.input}
-								secureTextEntry={true}
-								onChangeText={(value) =>
-									this.handleInput('password', value)}
+								secureTextEntry
+								onChangeText={this.handleInput('password')}
 							/>
 						</Item>
 					</Form>
 					<View style={styles.buttonGroup}>
 						<TouchableOpacity
-							onPress={() => this.changeScreen('ForgotPassword')}
+							onPress={this.changeScreen('ForgotPassword')}
 							style={styles.viewForgotPass}
 						>
 							<Text style={styles.buttonForgotPass}>
@@ -116,7 +113,7 @@ class Login extends Component {
 				</Content>
 				<Footer style={styles.footer}>
 					<LinearGradient {...buttomLinearGradientConfig} />
-					<Button transparent onPress={() => this.changeScreen('SignUp')}>
+					<Button transparent onPress={this.changeScreen('SignUp')}>
 						<Text style={styles.buttonSignUp}>Sign up for free</Text>
 					</Button>
 				</Footer>

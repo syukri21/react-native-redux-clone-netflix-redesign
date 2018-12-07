@@ -45,25 +45,25 @@ class SignUp extends React.Component {
 		this.props.addUser();
 	}
 
-	handleInput = (value, key) => {
-		if (key == 'check') {
-			this.setState({
-				[key] : !this.state.check
-			});
-		} else {
-			this.setState({
+	handleInput = (key) => (value = null) =>
+		this.setState((prevState) => {
+			if (key == 'check')
+				return {
+					[key] : !prevState.check
+				};
+			return {
 				user : {
-					...this.state.user,
+					...prevState.user,
 					[key] : value
 				}
-			});
-		}
-	};
+			};
+		});
 
 	handleSignUp = () => (user) => this.props.addUser(user.name, user.email, user.pass);
 
 	render() {
 		let { user } = this.state;
+
 		return (
 			<Container>
 				<HeaderMod register {...this.props}>
@@ -82,7 +82,7 @@ class SignUp extends React.Component {
 									<Label style={styles.float}>Username</Label>
 									<Input
 										style={styles.input}
-										onChangeText={(e) => this.handleInput('name', e)}
+										onChangeText={this.handleInput('name')}
 									/>
 								</Item>
 								<Item floatingLabel last style={styles.itemInput}>
@@ -90,7 +90,7 @@ class SignUp extends React.Component {
 									<Label style={styles.float}>Email</Label>
 									<Input
 										style={styles.input}
-										onChangeText={(e) => this.handleInput('email', e)}
+										onChangeText={this.handleInput('email')}
 									/>
 								</Item>
 								<Item floatingLabel last style={styles.itemInput}>
@@ -98,7 +98,7 @@ class SignUp extends React.Component {
 									<Label style={styles.float}>Password</Label>
 									<Input
 										style={styles.input}
-										onChangeText={(e) => this.handleInput('pass', e)}
+										onChangeText={this.handleInput('pass')}
 									/>
 								</Item>
 								<Item floatingLabel last style={styles.itemInput}>
@@ -106,15 +106,14 @@ class SignUp extends React.Component {
 									<Label style={styles.float}>Confirm Password</Label>
 									<Input
 										style={styles.input}
-										onChangeText={(e) =>
-											this.handleInput('confirmPass', e)}
+										onChangeText={this.handleInput('confirmPass')}
 									/>
 								</Item>
 							</Form>
 							<View style={styles.viewCheckBox}>
 								<CheckBox
 									checked={this.state.check}
-									onPress={(e) => this.handleInput('check', null)}
+									onPress={this.handleInput('check')}
 								/>
 								<Text style={styles.text}>
 									I accept the Terms and Conditions

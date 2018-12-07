@@ -39,7 +39,7 @@ class HeaderMod extends React.Component {
 	buttonProfile() {
 		return (
 			<Button {...buttonConfig} iconRight style={styles.buttonAdd}>
-				<Text>{this.user.username}</Text>
+				<Text>{this.user.username || 'we'}</Text>
 				<Image style={styles.imageProfil} source={this.user.image} />
 			</Button>
 		);
@@ -61,6 +61,7 @@ class HeaderMod extends React.Component {
 
 const mapStateToProps = (state) => {
 	let user = state.users.find((user) => user.isLoged);
+
 	return {
 		user : {
 			username : user ? user.username : null,

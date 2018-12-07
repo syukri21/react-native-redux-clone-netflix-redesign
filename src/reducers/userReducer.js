@@ -28,9 +28,9 @@ const addUserReducer = (state, action) => {
 	if (!authUser(state, action)) return state;
 
 	let newUser = {
-		username: action.username,
-		email: action.name,
-		password: action.password
+		username : action.username,
+		email    : action.name,
+		password : action.password
 	};
 
 	// return {
@@ -46,10 +46,9 @@ const addUserReducer = (state, action) => {
 
 const loginUserReducer = (state, action) => {
 	let login = {
-		username: action.username,
-		password: action.password
+		username : action.username,
+		password : action.password
 	};
-
 	let data = state.users.find((user) => login.username == user.username);
 
 	if (data == undefined) {
@@ -66,16 +65,16 @@ const loginUserReducer = (state, action) => {
 
 	let newData = {
 		...data,
-		isLoged: true
+		isLoged : true
 	};
 
 	return {
 		...state,
-		users: [
+		users       : [
 			...restData,
 			newData
 		],
-		isUserLoged: true
+		isUserLoged : true
 	};
 };
 
@@ -83,8 +82,8 @@ const logoutUserReducer = (state, action) => {
 	let newData = users;
 	return {
 		...state,
-		users: newData,
-		isUserLoged: false
+		users       : newData,
+		isUserLoged : false
 	};
 };
 
