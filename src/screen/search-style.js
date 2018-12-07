@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
 	},
 	titleItemSearch     : {
 		flex            : 4,
-		backgroundColor : '#222',
+		backgroundColor : 'red',
 		borderRadius    : 0
 	},
 	viewItemSearch      : {

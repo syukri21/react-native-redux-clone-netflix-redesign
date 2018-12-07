@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, TouchableOpacity } from 'react-native';
-import { CardItem, Text, Button } from 'native-base';
+import { CardItem, Text, Button, Icon, Badge } from 'native-base';
 import { connect } from 'react-redux';
 import { _ } from 'lodash';
 
@@ -17,9 +17,16 @@ class HomeRenderItem extends React.Component {
 
 	isWatched(id) {
 		const bool = _.includes(this.props.watchFilmId, id);
-		return {
-			backgroundColor : bool ? '#7CB34288' : 'rgba(0,0,0,0.5)'
-		};
+		if (bool)
+			return (
+				<CardItem cardBody style={styles.cardContent2}>
+					<Badge style={{ backgroundColor: '#526E3188' }}>
+						<Text>in WatchList</Text>
+					</Badge>
+				</CardItem>
+			);
+
+		return null;
 	}
 
 	changeScreen = (to, id) => () => this.navigation.navigate(to, { itemId: id });
@@ -32,12 +39,17 @@ class HomeRenderItem extends React.Component {
 					<CardItem cardBody>
 						<Image style={styles.itemImage} source={data.gambar} resizeMode='cover' />
 					</CardItem>
+					{this.isWatched(data.id)}
 					<CardItem cardBody style={styles.cardContent}>
 						<Button
 							full
 							style={[
 								styles.button,
-								this.isWatched(data.id)
+								{
+									backgroundColor : _.includes(this.props.watchFilmId, data.id)
+										? '#526E3188'
+										: '#05030788'
+								}
 							]}
 						>
 							<Text style={styles.text}>{data.title}</Text>

@@ -17,9 +17,11 @@ import {
 	CardItem
 } from 'native-base';
 import { ListView, TouchableOpacity, Image } from 'react-native';
+import { _ } from 'lodash';
 
 import { connect } from 'react-redux';
 import { onSearchFilm } from '../actions/searchAction';
+import { onCloseDraw, onOpenDraw } from '../actions/drawerAction';
 import { addWatchList } from '../actions/watchListAction';
 
 // Styles
@@ -39,26 +41,12 @@ class Search extends React.Component {
 	};
 
 	handleAdd = (id) => () => {
+		this.props.onCloseDraw();
 		this.props.addWatchList(id);
 		this.navigation.navigate('WatchList');
 	};
 
-	renderItem = (item) => {
-		return (
-			<TouchableOpacity last onPress={this.changeScreen(item.id)} key={item.id}>
-				<View style={styles.viewItemSearch}>
-					<CardItem style={styles.cardImageItemSearch} cardBody>
-						<Image source={item.gambar} style={styles.imageItemSearch} />
-					</CardItem>
-					<CardItem style={styles.titleItemSearch}>
-						<Left>
-							<Text style={styles.white}>{item.title}</Text>
-						</Left>
-					</CardItem>
-				</View>
-			</TouchableOpacity>
-		);
-	};
+	renderItem = (item) => <RenderItemConnect item={item} navigation={this.props.navigation} />;
 
 	renderItems = () =>
 		this.props.searchListFilm.length !== 0 ? (
@@ -100,14 +88,57 @@ class Search extends React.Component {
 	}
 }
 
+class RenderItem extends React.Component {
+	constructor(props) {
+		super(props);
+		this.navigation = this.props.navigation;
+	}
+
+	changeScreen = (id) => () => {
+		this.navigation.navigate('Detail', { itemId: id });
+	};
+	render() {
+		const { item } = this.props;
+		const bool = _.includes(this.props.watchListId, item.id);
+		return (
+			<TouchableOpacity last onPress={this.changeScreen(item.id)} key={item.id}>
+				<View style={styles.viewItemSearch}>
+					<CardItem style={styles.cardImageItemSearch} cardBody>
+						<Image source={item.gambar} style={styles.imageItemSearch} />
+					</CardItem>
+					<CardItem
+						style={[
+							styles.titleItemSearch,
+							{
+								backgroundColor : bool ? 'green' : '#222'
+							}
+						]}
+					>
+						<Left>
+							<Text style={styles.white}>{item.title}</Text>
+						</Left>
+					</CardItem>
+				</View>
+			</TouchableOpacity>
+		);
+	}
+}
+
+const mStP = (state) => ({
+	watchListId : state.watchListFilm.map((item) => item.id)
+});
+
 const mapStateToProps = (state) => ({
 	searchListFilm : state.searchListFilm,
 	searchData     : state.searchData
 });
 
+const RenderItemConnect = connect(mStP)(RenderItem);
+
 const mapDispatchToProps = (dispatch) => ({
 	onSearch     : (regex) => dispatch(onSearchFilm(regex)),
-	addWatchList : (id) => dispatch(addWatchList(id))
+	addWatchList : (id) => dispatch(addWatchList(id)),
+	onCloseDraw  : () => dispatch(onCloseDraw())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);
