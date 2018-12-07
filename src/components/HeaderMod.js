@@ -1,16 +1,17 @@
 import React from 'react';
-import { Header, Button, Icon, Text } from 'native-base';
-import LinearGradient from 'react-native-linear-gradient';
+import { Header, Button, Icon, Text, Badge } from 'native-base';
 
-import { StyleSheet, View } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import { View, Image } from 'react-native';
+import { connect } from 'react-redux';
+
+import { styles } from './headerModeStyle';
 
 class HeaderMod extends React.Component {
-
-	constructor(props){
+	constructor(props) {
 		super(props);
-		this.username = props.title;
+		this.user = this.props.user;
 	}
-
 	buttonMenu() {
 		return (
 			<Button transparent light style={styles.buttonBack} iconLeft onPress={() => this.props.toggleDrawer()}>
@@ -29,16 +30,9 @@ class HeaderMod extends React.Component {
 
 	buttonProfile() {
 		return (
-			<Button
-				transparent
-				light
-				iconRight
-				style={styles.buttonAdd}
-				
-			>
-				<Text>{this.username}</Text>
-				<Icon active name="person" style={{ color: 'white', fontSize: 40 }} />
-				
+			<Button transparent light iconRight style={styles.buttonAdd}>
+				<Text>{this.user.username}</Text>
+				<Image style={{ height: 50, width: 50, borderRadius: 40, marginRight: 10 }} source={this.user.image} />
 			</Button>
 		);
 	}
@@ -77,34 +71,14 @@ class HeaderMod extends React.Component {
 	}
 }
 
-const styles = StyleSheet.create({
-	header: {
-		height: 80,
-		backgroundColor: 'transparent'
-	},
-	buttonBack: {
-		transform: [
-			{ translateX: -20 }
-		]
-	},
-	headerText: {
-		color: '#fff',
-		alignSelf: 'center',
-		flex: 1
-	},
-	buttonAdd: {
-		justifyContent: 'center',
-		transform: [
-			{ translateX: 15 }
-		]
-	},
-	absolute: {
-		position: 'absolute',
-		top: 80,
-		left: 0,
-		right: 0,
-		bottom: 0,
-		flex: 1
-	}
-});
-export default HeaderMod;
+const mapStateToProps = (state) => {
+	let user = state.users.find((user) => user.isLoged);
+	return {
+		user: {
+			username: user ? user.username : null,
+			image: user ? user.image : null
+		}
+	};
+};
+
+export default connect(mapStateToProps)(HeaderMod);

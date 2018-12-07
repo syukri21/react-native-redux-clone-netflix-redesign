@@ -4,37 +4,32 @@ import LinearGradient from 'react-native-linear-gradient';
 import { TouchableOpacity } from 'react-native';
 import { styles } from './login-style';
 import { BoxShadow } from 'react-native-shadow';
-import {connect}  from 'react-redux';
-import {onLogin, onLogout} from '../actions/usersAction';
+import { connect } from 'react-redux';
+import { onLogin, onLogout } from '../actions/usersAction';
 
 import BackgroundImage from '../components/BackgroundImage';
 
-
-
 class Login extends Component {
-
-	constructor(props){
-		super(props)
+	constructor(props) {
+		super(props);
 		this.state = {
-			isLoged : props.isUserLoged,
-			username : '',
-			password: '',
-
-		}
+			isLoged: props.isUserLoged,
+			username: '',
+			password: ''
+		};
 	}
 
-	handleInput(key, value){
+	handleInput(key, value) {
 		this.setState({
 			...this.state,
-			[key] : value
-		})
+			[key]: value
+		});
 	}
 
-	handleLogin(){
+	handleLogin() {
 		this.props.onLogout();
-		let {username, password} = this.state;
+		let { username, password } = this.state;
 		this.props.onLogin(username, password);
-	
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -45,7 +40,6 @@ class Login extends Component {
 		this.props.isUserLoged && this.props.navigation.navigate('Home');
 	}
 
-	
 	render() {
 		return (
 			<Container style={styles.container}>
@@ -86,12 +80,16 @@ class Login extends Component {
 						<Item floatingLabel last style={styles.item}>
 							<Icon style={styles.icon} active name="mail" />
 							<Label style={styles.label}>Email</Label>
-							<Input style={styles.input} onChangeText={(value) => this.handleInput('username', value)}  />
+							<Input style={styles.input} onChangeText={(value) => this.handleInput('username', value)} />
 						</Item>
 						<Item floatingLabel last style={styles.item}>
 							<Icon style={styles.icon} active name="eye" />
 							<Label style={styles.label}>Password</Label>
-							<Input style={styles.input} secureTextEntry={true} onChangeText={(value) => this.handleInput('password', value)} />
+							<Input
+								style={styles.input}
+								secureTextEntry={true}
+								onChangeText={(value) => this.handleInput('password', value)}
+							/>
 						</Item>
 					</Form>
 					<View style={styles.buttonGroup}>
@@ -102,12 +100,7 @@ class Login extends Component {
 							<Text style={styles.buttonForgotPass}>Forgot My Password ?</Text>
 						</TouchableOpacity>
 						<BoxShadow setting={shadowOpt}>
-							<Button
-								primary
-								full
-								style={styles.buttonSignIn}
-								onPress={() => this.handleLogin()}
-							>
+							<Button primary full style={styles.buttonSignIn} onPress={() => this.handleLogin()}>
 								<LinearGradient
 									colors={[
 										'#B7135C',
@@ -154,7 +147,6 @@ class Login extends Component {
 	}
 }
 
-
 const shadowOpt = {
 	width: 350,
 	height: 70,
@@ -173,14 +165,11 @@ const shadowOpt = {
 	}
 };
 
-
-const mapStateToProps = (state) => ({isUserLoged : state.isUserLoged })
-
+const mapStateToProps = (state) => ({ isUserLoged: state.isUserLoged });
 
 const mapDispatchToProps = (dispatch) => ({
-	onLogin : (username, password) => dispatch(onLogin(username, password )),
-	onLogout : () => dispatch(onLogout())
-})
-		
+	onLogin: (username, password) => dispatch(onLogin(username, password)),
+	onLogout: () => dispatch(onLogout())
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

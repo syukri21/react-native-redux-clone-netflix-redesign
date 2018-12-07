@@ -10,10 +10,13 @@ class FloatButton extends React.Component {
 	constructor(props) {
 		super(props);
 		this.navigation = props.navigation;
-		this.closeDrawer = props.closeDrawer
+		this.closeDrawer = props.closeDrawer;
 	}
 
-	bounce = () => this.btn.bounce(200).then(({ finished }) => finished && this.navigation.navigate('Search') && this.closeDrawer());
+	bounce = () =>
+		this.btn
+			.bounce(200)
+			.then(({ finished }) => finished && this.navigation.navigate('Search') && this.closeDrawer());
 	render() {
 		return (
 			<Animatable.View
