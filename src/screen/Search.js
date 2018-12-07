@@ -28,13 +28,13 @@ class Search extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			ds: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }),
-			placeholder: props.searchData
+			ds          : new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }),
+			placeholder : props.searchData
 		};
 		this.navigation = props.navigation;
 	}
 
-	renderItem(item) {
+	renderItem = (item) => {
 		return (
 			<TouchableOpacity
 				last
@@ -44,14 +44,16 @@ class Search extends React.Component {
 			>
 				<View style={{ flex: 1, margin: 0, padding: 0, flexDirection: 'row' }}>
 					<CardItem style={{ flex: 2, padding: 0, backgroundColor: 'green' }} cardBody>
-						<Image source={item.gambar} style={{ width: '100%', height: 100, flex: 1 }} />
+						<Image
+							source={item.gambar}
+							style={{ width: '100%', height: 100, flex: 1 }}
+						/>
 					</CardItem>
 					<CardItem
 						style={{
-							flex: 4,
-
-							backgroundColor: '#222',
-							borderRadius: 0
+							flex            : 4,
+							backgroundColor : '#222',
+							borderRadius    : 0
 						}}
 					>
 						<Left>
@@ -61,12 +63,18 @@ class Search extends React.Component {
 				</View>
 			</TouchableOpacity>
 		);
-	}
+	};
 
-	handleAdd(id) {
+	handleAdd = (id) => () => {
 		this.props.addWatchList(id);
 		this.navigation.navigate('WatchList');
-	}
+	};
+
+	rightHiddenItem = (data) => (
+		<Button full success onPress={this.handleAdd(data.id)}>
+			<Icon active name='add' />
+		</Button>
+	);
 
 	render() {
 		return (
@@ -76,29 +84,25 @@ class Search extends React.Component {
 						<Input
 							value={this.props.searchData}
 							style={styles.inputSearch}
-							onChangeText={(e) => this.props.onSearch(e)}
-							placeholder="Search"
+							onChangeText={this.props.onSearch}
+							placeholder='Search'
 						/>
 						<Icon
 							style={[
 								styles.icon,
 								styles.iconSearch
 							]}
-							name="md-search"
+							name='md-search'
 						/>
 					</Item>
 				</Header>
 				<Content style={styles.content}>
 					{this.props.searchListFilm.length !== 0 ? (
 						<List
-							renderRow={(data) => this.renderItem(data)}
+							renderRow={this.renderItem}
 							rightOpenValue={-100}
 							dataSource={this.state.ds.cloneWithRows(this.props.searchListFilm)}
-							renderRightHiddenRow={(data) => (
-								<Button full success onPress={() => this.handleAdd(data.id)}>
-									<Icon active name="add" />
-								</Button>
-							)}
+							renderRightHiddenRow={this.rightHiddenItem}
 						/>
 					) : (
 						<Body style={{ paddingTop: 40 }}>
@@ -112,13 +116,13 @@ class Search extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-	searchListFilm: state.searchListFilm,
-	searchData: state.searchData
+	searchListFilm : state.searchListFilm,
+	searchData     : state.searchData
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	onSearch: (regex) => dispatch(onSearchFilm(regex)),
-	addWatchList: (id) => dispatch(addWatchList(id))
+	onSearch     : (regex) => dispatch(onSearchFilm(regex)),
+	addWatchList : (id) => dispatch(addWatchList(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);
