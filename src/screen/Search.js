@@ -14,7 +14,8 @@ import {
 	Left,
 	Body,
 	List,
-	CardItem
+	CardItem,
+	Badge
 } from 'native-base';
 import { ListView, TouchableOpacity, Image } from 'react-native';
 import { _ } from 'lodash';
@@ -97,6 +98,12 @@ class RenderItem extends React.Component {
 	changeScreen = (id) => () => {
 		this.navigation.navigate('Detail', { itemId: id });
 	};
+
+	badgeSign = () => (
+		<Badge style={styles.badgeSign}>
+			<Text>Added</Text>
+		</Badge>
+	);
 	render() {
 		const { item } = this.props;
 		const bool = _.includes(this.props.watchListId, item.id);
@@ -106,11 +113,12 @@ class RenderItem extends React.Component {
 					<CardItem style={styles.cardImageItemSearch} cardBody>
 						<Image source={item.gambar} style={styles.imageItemSearch} />
 					</CardItem>
+
 					<CardItem
 						style={[
 							styles.titleItemSearch,
 							{
-								backgroundColor : bool ? 'green' : '#222'
+								backgroundColor : bool ? '#222' : '#22222288'
 							}
 						]}
 					>
@@ -118,6 +126,7 @@ class RenderItem extends React.Component {
 							<Text style={styles.white}>{item.title}</Text>
 						</Left>
 					</CardItem>
+					{bool && this.badgeSign()}
 				</View>
 			</TouchableOpacity>
 		);

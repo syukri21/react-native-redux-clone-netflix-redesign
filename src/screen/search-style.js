@@ -56,15 +56,15 @@ const styles = StyleSheet.create({
 		left     : 0
 	},
 	titleItemSearch     : {
-		flex            : 4,
-		backgroundColor : 'red',
-		borderRadius    : 0
+		flex         : 4,
+		borderRadius : 0
 	},
 	viewItemSearch      : {
-		flex          : 1,
-		margin        : 0,
-		padding       : 0,
-		flexDirection : 'row'
+		flex            : 1,
+		margin          : 0,
+		padding         : 0,
+		flexDirection   : 'row',
+		backgroundColor : 'black'
 	},
 	cardImageItemSearch : {
 		flex            : 2,
